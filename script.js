@@ -1,0 +1,117 @@
+// Tabs Portfolio (mantido)
+  const tabs = document.querySelectorAll('.tabs button');
+  const contents = document.querySelectorAll('.tab-content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      contents.forEach(c => c.classList.remove('active'));
+      const activeContent = document.getElementById(tab.dataset.tab);
+      activeContent.classList.add('active');
+      const cards = activeContent.querySelectorAll('.card');
+      cards.forEach((card,i)=>{ card.classList.remove('visible'); setTimeout(()=>card.classList.add('visible'),i*150); });
+    });
+  });
+
+  // 1. Marcação das seções na navegação
+  // 2. Efeito de scroll ativo
+  const navLinks = document.querySelectorAll('nav a');
+  const sections = document.querySelectorAll('section');
+
+  const options = {
+    root: null,
+    rootMargin: '0px',
+    // O threshold determina quando o evento será acionado.
+    // 0.7 significa que o evento será acionado quando 70% da seção estiver visível.
+    // Isso garante que a seção só "apareça" quando você estiver realmente nela.
+    threshold: 0.7 
+  };
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Adiciona a classe 'visible' à seção quando ela entra na viewport
+        entry.target.classList.add('visible');
+
+        // Encontra o link de navegação correspondente
+        const currentId = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href').substring(1) === currentId) {
+            link.classList.add('active');
+          }
+        });
+      } else {
+        // Remove a classe 'visible' quando a seção sai da viewport
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, options);
+
+  sections.forEach(section => {
+    observer.observe(section);
+  });
+
+  // Efeito de digitação corrigido na seção Home
+  function startTypingEffect() {
+    const h1 = document.getElementById('home').querySelector('h1');
+    const h2 = document.getElementById('home').querySelector('h2');
+    
+    h1.style.animation = 'typing 2s steps(15) forwards, blink 0.75s step-end infinite';
+    
+    // Atraso para a animação do h2 começar após a do h1
+    h2.style.animation = 'none'; // Reseta a animação antes de iniciar
+    setTimeout(() => {
+      h2.style.animation = 'typing2 2s steps(10) forwards, blink 0.75s step-end infinite';
+    }, 2000); // 2 segundos de atraso (duração da animação do h1)
+  }
+
+  // Observa a seção Home e inicia a animação apenas quando ela está visível
+  const homeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        startTypingEffect();
+        // Para de observar após a primeira vez para não reiniciar
+        homeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 }); // Inicia quando metade da seção Home está visível
+
+  homeObserver.observe(document.getElementById('home'));
+
+  // Animação da malha quadriculada (mantida)
+  const canvas = document.getElementById('bg');
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
+  const gridSize = 50;
+  const gridColor = 'rgba(200,200,255,0.05)';
+
+  function drawGrid(){
+    ctx.strokeStyle = gridColor;
+    ctx.lineWidth = 1;
+    for(let x=0;x<width;x+=gridSize){
+      ctx.beginPath();
+      ctx.moveTo(x,0);
+      ctx.lineTo(x,height);
+      ctx.stroke();
+    }
+    for(let y=0;y<height;y+=gridSize){
+      ctx.beginPath();
+      ctx.moveTo(0,y);
+      ctx.lineTo(width,y);
+      ctx.stroke();
+    }
+  }
+
+  function animate(){
+    ctx.clearRect(0,0,width,height);
+    drawGrid();
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  window.addEventListener('resize',()=>{
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });

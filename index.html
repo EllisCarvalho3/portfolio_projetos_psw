@@ -3,254 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="img/icone_portfolio.png" type="image/png">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <title>Meu Portfólio</title>
-<style>
-  body { margin: 0; font-family: Arial, sans-serif; background: #0d0d0d; color: #e6e6fa; scroll-behavior: smooth; overflow-x: hidden; }
 
-  /* Canvas de partículas */
-  canvas#bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #0d0d0d; }
-
-  header { background: rgba(13,13,13,0.9); padding: 1rem; text-align: center; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
-  nav a { margin: 0 15px; color: #e6e6fa; text-decoration: none; font-weight: bold; transition: color 0.3s; }
-  nav a:hover { color: #c77dff; }
-  nav a.active { border-bottom: 2px solid #c77dff; }
-
-  /* Seções */
-  section { padding: 60px 20px; min-height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
-  section.visible { opacity: 1; transform: translateY(0); }
-  section > * { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-  section.visible > * { opacity: 1; transform: translateY(0); }
-
-  /* Home */
-  #home { flex-direction: row; justify-content: space-around; text-align: left; }
-  #home .text { max-width: 500px; }
-  #home h1, #home h2 { background: linear-gradient(90deg, #a64dff, #c77dff, #e6e6fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 15px rgba(199,125,255,0.7); margin: 0; overflow: hidden; white-space: nowrap; border-right: 2px solid #c77dff; }
-  #home h1 { font-size: 3.5rem; animation: typing 2s steps(15), blink 0.75s step-end infinite; }
-  #home h2 { font-size: 2.5rem; animation: typing2 2s steps(10), blink 0.75s step-end infinite; margin-bottom: 20px; }
-  #home p { font-size: 1.2rem; color: #e6e6fa; }
-  #home img { width: 350px; height: 350px; border-radius: 50%; border: 4px solid #c77dff; box-shadow: 0 0 30px rgba(199,125,255,0.5); animation: float 3s ease-in-out infinite; }
-
-  @keyframes typing { from { width: 0; } to { width: 100%; } }
-  @keyframes typing2 { from { width: 0; } to { width: 100%; } }
-  @keyframes blink { 50% { border-color: transparent; } }
-  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
-
-  /* Sobre */
-  #sobre { flex-direction: row; justify-content: space-around; text-align: left; }
-  #sobre .text { max-width: 500px; }
-  #sobre h2 { font-size: 2.5rem; background: linear-gradient(90deg, #c77dff, #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 15px rgba(199,125,255,0.7); }
-  #sobre p { font-size: 1.2rem; line-height: 1.8; color: #e6e6fa; }
-  #sobre .foto { width: 300px; height: 300px; border-radius: 50%; background: #222; border: 4px solid #c77dff; box-shadow: 0 0 30px rgba(199,125,255,0.5); background-size: cover; background-position: center; animation: float 4s ease-in-out infinite; }
-
-  /* Portfolio */
-  #portfolio { flex-direction: column; }
-  #portfolio h2 { font-size: 2.5rem; background: linear-gradient(90deg, #c77dff, #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 15px rgba(199,125,255,0.7); margin-bottom: 20px; animation: neonPulse 2s infinite; }
-  .tabs { display: flex; gap: 20px; margin-bottom: 20px; }
-  .tabs button { background: transparent; border: 2px solid #c77dff; padding: 10px 20px; border-radius: 8px; color: #c77dff; cursor: pointer; font-weight: bold; transition: 0.3s; }
-  .tabs button.active { background: #c77dff; color: #0d0d0d; }
-  .tab-content { display: none; gap: 20px; flex-wrap: wrap; justify-content: center; width: 100%; }
-  .tab-content.active { display: flex; }
-
-  /* Cards */
-  .card { width: 250px; height: 180px; background: #2a002a; border-radius: 12px; box-shadow: 0 0 20px rgba(199,125,255,0.4); background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; color: #fff; font-weight: bold; font-size: 1.2rem; opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.4s, text-shadow 0.4s; }
-  .card.visible { opacity: 1; transform: translateY(0); }
-  .card:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 0 30px #c77dff, 0 0 60px #a64dff, 0 0 90px #e6e6fa; text-shadow: 0 0 10px #c77dff, 0 0 20px #a64dff, 0 0 30px #e6e6fa; cursor: pointer; }
-
-  /* Contato */
-  #contato { flex-direction: column; text-align: center; }
-  #contato h2 { font-size: 2.5rem; background: linear-gradient(90deg, #c77dff, #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 15px rgba(199,125,255,0.7); animation: neonPulse 2s infinite; }
-  .socials { display: flex; gap: 20px; margin-top: 20px; justify-content: center; }
-  .socials a { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: #2a002a; box-shadow: 0 0 20px rgba(199,125,255,0.5); font-size: 1.5rem; color: #c77dff; transition: transform 0.3s; }
-  .socials a:hover { transform: scale(1.2); background: #c77dff; color: #0d0d0d; }
-
-  /* Neon pulse */
-  @keyframes neonPulse { 0%,100%{text-shadow:0 0 10px #c77dff,0 0 20px #a64dff;}50%{text-shadow:0 0 20px #c77dff,0 0 40px #a64dff;} }
-
-  /* Vaga-lumes */
-.firefly {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  width: 0.4vw;
-  height: 0.4vw;
-  animation: ease 200s alternate infinite;
-  pointer-events: none;
-}
-
-.firefly::before,
-.firefly::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  transform-origin: -10vw;
-}
-
-.firefly::before {
-  background: black;
-  opacity: 0.4;
-  animation: drift ease alternate infinite;
-}
-
-.firefly::after {
-  background: white;
-  opacity: 0;
-  box-shadow: 0 0 0vw 0vw rgb(120, 86, 243);
-  animation: drift ease alternate infinite, flash ease infinite;
-}
-
-/* Animações de movimento */
-@keyframes move1 {
-  0% { transform: translateX(31vw) translateY(31vh) scale(0.66); } 
-  100% { transform: translateX(-47vw) translateY(-44vh) scale(0.9); }
-}
-
-@keyframes move2 {
-  0% { transform: translateX(47vw) translateY(-37vh) scale(0.63); }
-  100% { transform: translateX(29vw) translateY(-37vh) scale(0.8); }
-}
-
-@keyframes move3 {
-  0% { transform: translateX(-26vw) translateY(-40vh) scale(0.68); }
-  100% { transform: translateX(11vw) translateY(36vh) scale(0.58); }
-}
-
-@keyframes move4 {
-  0% { transform: translateX(-31vw) translateY(14vh) scale(0.63); }
-  100% { transform: translateX(-23vw) translateY(12vh) scale(0.55); }
-}
-
-@keyframes move5 {
-  0% { transform: translateX(33vw) translateY(41vh) scale(0.5); }
-  100% { transform: translateX(-34vw) translateY(13vh) scale(0.53); }
-}
-
-@keyframes move6 {
-  0% { transform: translateX(23vw) translateY(-21vh) scale(0.78); }
-  100% { transform: translateX(41vw) translateY(-47vh) scale(0.85); }
-}
-
-@keyframes move7 {
-  0% { transform: translateX(-21vw) translateY(28vh) scale(0.69); }
-  100% { transform: translateX(14vw) translateY(-14vh) scale(0.9); }
-}
-
-@keyframes move8 {
-  0% { transform: translateX(-16vw) translateY(-13vh) scale(0.55); }
-  100% { transform: translateX(-49vw) translateY(-19vh) scale(0.5); }
-}
-
-@keyframes move9 {
-  0% { transform: translateX(48vw) translateY(37vh) scale(0.85); }
-  100% { transform: translateX(30vw) translateY(-47vh) scale(0.8); }
-}
-
-@keyframes move10 {
-  0% { transform: translateX(34vw) translateY(49vh) scale(0.85); }
-  100% { transform: translateX(20vw) translateY(42vh) scale(0.63); }
-}
-
-@keyframes move11 {
-  0% { transform: translateX(-19vw) translateY(39vh) scale(0.72); }
-  100% { transform: translateX(-11vw) translateY(-41vh) scale(0.9); }
-}
-
-@keyframes move12 {
-  0% { transform: translateX(31vw) translateY(34vh) scale(0.64); }
-  100% { transform: translateX(12vw) translateY(11vh) scale(0.5); }
-}
-
-@keyframes move13 {
-  0% { transform: translateX(-27vw) translateY(-12vh) scale(0.5); }
-  100% { transform: translateX(30vw) translateY(24vh) scale(0.8); }
-}
-
-@keyframes move14 {
-  0% { transform: translateX(10vw) translateY(11vh) scale(0.5); }
-  100% { transform: translateX(20vw) translateY(-47vh) scale(0.8); }
-}
-
-@keyframes move15 {
-  0% { transform: translateX(-45vw) translateY(16vh) scale(0.8); }
-  100% { transform: translateX(38vw) translateY(45vh) scale(0.85); }
-}
-
-@keyframes drift {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes flash {
-  0%, 30%, 100% { opacity: 0; box-shadow: 0 0 0vw 0vw yellow; }
-  5% { opacity: 1; box-shadow: 0 0 2vw 0.4vw yellow; }
-}
-
-/* Aplicação das animações nos vaga-lumes */
-.firefly:nth-child(1) { animation-name: move1; }
-.firefly:nth-child(1)::before { animation-duration: 9s; }
-.firefly:nth-child(1)::after { animation-duration: 9s, 6400ms; animation-delay: 0ms, 4500ms; }
-
-.firefly:nth-child(2) { animation-name: move2; }
-.firefly:nth-child(2)::before { animation-duration: 10s; }
-.firefly:nth-child(2)::after { animation-duration: 10s, 7100ms; animation-delay: 0ms, 5800ms; }
-
-.firefly:nth-child(3) { animation-name: move3; }
-.firefly:nth-child(3)::before { animation-duration: 12s; }
-.firefly:nth-child(3)::after { animation-duration: 12s, 9500ms; animation-delay: 0ms, 7100ms; }
-
-.firefly:nth-child(4) { animation-name: move4; }
-.firefly:nth-child(4)::before { animation-duration: 18s; }
-.firefly:nth-child(4)::after { animation-duration: 18s, 8400ms; animation-delay: 0ms, 6700ms; }
-
-.firefly:nth-child(5) { animation-name: move5; }
-.firefly:nth-child(5)::before { animation-duration: 13s; }
-.firefly:nth-child(5)::after { animation-duration: 13s, 5900ms; animation-delay: 0ms, 3900ms; }
-
-.firefly:nth-child(6) { animation-name: move6; }
-.firefly:nth-child(6)::before { animation-duration: 15s; }
-.firefly:nth-child(6)::after { animation-duration: 15s, 8900ms; animation-delay: 0ms, 8200ms; }
-
-.firefly:nth-child(7) { animation-name: move7; }
-.firefly:nth-child(7)::before { animation-duration: 14s; }
-.firefly:nth-child(7)::after { animation-duration: 14s, 7600ms; animation-delay: 0ms, 6100ms; }
-
-.firefly:nth-child(8) { animation-name: move8; }
-.firefly:nth-child(8)::before { animation-duration: 11s; }
-.firefly:nth-child(8)::after { animation-duration: 11s, 9200ms; animation-delay: 0ms, 5400ms; }
-
-.firefly:nth-child(9) { animation-name: move9; }
-.firefly:nth-child(9)::before { animation-duration: 16s; }
-.firefly:nth-child(9)::after { animation-duration: 16s, 6700ms; animation-delay: 0ms, 4800ms; }
-
-.firefly:nth-child(10) { animation-name: move10; }
-.firefly:nth-child(10)::before { animation-duration: 12s; }
-.firefly:nth-child(10)::after { animation-duration: 12s, 5500ms; animation-delay: 0ms, 7300ms; }
-
-.firefly:nth-child(11) { animation-name: move11; }
-.firefly:nth-child(11)::before { animation-duration: 14s; }
-.firefly:nth-child(11)::after { animation-duration: 14s, 8700ms; animation-delay: 0ms, 6200ms; }
-
-.firefly:nth-child(12) { animation-name: move12; }
-.firefly:nth-child(12)::before { animation-duration: 17s; }
-.firefly:nth-child(12)::after { animation-duration: 17s, 6100ms; animation-delay: 0ms, 3500ms; }
-
-.firefly:nth-child(13) { animation-name: move13; }
-.firefly:nth-child(13)::before { animation-duration: 10s; }
-.firefly:nth-child(13)::after { animation-duration: 10s, 7200ms; animation-delay: 0ms, 5100ms; }
-
-.firefly:nth-child(14) { animation-name: move14; }
-.firefly:nth-child(14)::before { animation-duration: 11s; }
-.firefly:nth-child(14)::after { animation-duration: 11s, 8100ms; animation-delay: 0ms, 6900ms; }
-
-.firefly:nth-child(15) { animation-name: move15; }
-.firefly:nth-child(15)::before { animation-duration: 18s; }
-.firefly:nth-child(15)::after { animation-duration: 18s, 6800ms; animation-delay: 0ms, 4300ms; }
-
-</style>
 </head>
 <body>
-<canvas id="bg"></canvas>
+
+<canvas id="bg">
+
+</canvas>
 
 <div class="firefly"></div>
 <div class="firefly"></div>
@@ -269,6 +32,9 @@
 <div class="firefly"></div>
 
 <header>
+     <div class="logo-img">
+      <img src="img/imagem_header.png" alt="logo">
+    </div>
 <nav>
   <a href="#home" class="active">Home</a>
   <a href="#sobre">Sobre</a>
@@ -283,7 +49,7 @@
   <h2>Developer</h2>
   <p>Construindo experiências digitais criativas e funcionais para todos os dispositivos.</p>
 </div>
-<img src="https://via.placeholder.com/350" alt="Foto Home">
+<img src="img/profile picture.jpg" alt="Foto Home">
 </section>
 
 <section id="sobre">
@@ -291,7 +57,7 @@
   <h2>Sobre mim</h2>
   <p>Sou um desenvolvedor fictício apaixonado por transformar ideias em experiências digitais. Trabalho na criação de interfaces modernas, responsivas e intuitivas. Meu objetivo é sempre entregar o melhor resultado, unindo design criativo e performance.</p>
 </div>
-<div class="foto" style="background-image: url('https://via.placeholder.com/300');"></div>
+<div class="foto" style="background-image: url('img/eu_secundaria.jpg');"></div>
 </section>
 
 <section id="portfolio">
@@ -316,11 +82,10 @@
   <div class="card">Certificado 8</div>
 </div>
 <div id="tecnologias" class="tab-content">
-  <div class="card">Tech 1</div>
-  <div class="card">Tech 2</div>
-  <div class="card">Tech 3</div>
-  <div class="card">Tech 4</div>
-  <div class="card">Tech 5</div>
+  <div class="card"><img src="img/html (2).png" alt="" srcset=""></div>
+  <div class="card"><img src="img/css.png" alt=""></div>
+  <div class="card"><img src="img//js.png" alt="" srcset=""></div>
+  <div class="card"><img src="img/bootstrap.png" alt="" srcset=""></div>
 </div>
 </section>
 
@@ -328,80 +93,33 @@
 <h2>Contato</h2>
 <p>Conecte-se comigo através das redes sociais:</p>
 <div class="socials">
-  <a href="#">🐦</a>
-  <a href="#">💼</a>
-  <a href="#">📷</a>
-  <a href="#">💻</a>
+  <a href="https://github.com/EllisCarvalho3"><i class="bi bi-github"></i></a>
+  <a href="www.linkedin.com/in/ellis-xavier"><i class="bi bi-linkedin"></i></a>
+  <a href="https://www.instagram.com/elliscarv"><i class="bi bi-instagram"></i></a>
+  <a href="twitch.tv/elliscarv"><i class="bi bi-twitch"></i></a>
 </div>
 </section>
 
-<script>
-  // Tabs Portfolio
-  const tabs = document.querySelectorAll('.tabs button');
-  const contents = document.querySelectorAll('.tab-content');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      contents.forEach(c => c.classList.remove('active'));
-      const activeContent = document.getElementById(tab.dataset.tab);
-      activeContent.classList.add('active');
-      const cards = activeContent.querySelectorAll('.card');
-      cards.forEach((card,i)=>{ card.classList.remove('visible'); setTimeout(()=>card.classList.add('visible'),i*150); });
-    });
-  });
+<script src="script.js"></script>
 
-  // Seções animadas ao scroll
-  const sections = document.querySelectorAll('section');
-  const sectionObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-        const elements = Array.from(entry.target.children);
-        elements.forEach((el,i)=>{ el.style.transitionDelay=`${i*0.2}s`; el.classList.add('visible'); });
-        const cards = entry.target.querySelectorAll('.card');
-        cards.forEach((card,i)=>setTimeout(()=>card.classList.add('visible'),i*150));
-      }
-    });
-  },{threshold:0.3});
-  sections.forEach(section=>sectionObserver.observe(section));
+<html>
 
-  // Animação da malha quadriculada (mantida)
-  const canvas = document.getElementById('bg');
-  const ctx = canvas.getContext('2d');
-  let width = canvas.width = window.innerWidth;
-  let height = canvas.height = window.innerHeight;
-  const gridSize = 50;
-  const gridColor = 'rgba(200,200,255,0.05)';
+<body>
+  <footer class="footer">
+    <div class="waves">
+      <div class="wave" id="wave1"></div>
+      <div class="wave" id="wave2"></div>
+      <div class="wave" id="wave3"></div>
+      <div class="wave" id="wave4"></div>
+    </div>
+  
+    <p>&copy;2025 Ellis Carvalho Xavier. Todos os direitos reservados.</p>
+  </footer>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
 
-  function drawGrid(){
-    ctx.strokeStyle = gridColor;
-    ctx.lineWidth = 1;
-    for(let x=0;x<width;x+=gridSize){
-      ctx.beginPath();
-      ctx.moveTo(x,0);
-      ctx.lineTo(x,height);
-      ctx.stroke();
-    }
-    for(let y=0;y<height;y+=gridSize){
-      ctx.beginPath();
-      ctx.moveTo(0,y);
-      ctx.lineTo(width,y);
-      ctx.stroke();
-    }
-  }
+</html>
 
-  function animate(){
-    ctx.clearRect(0,0,width,height);
-    drawGrid();
-    requestAnimationFrame(animate);
-  }
-  animate();
-
-  window.addEventListener('resize',()=>{
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  });
-</script>
 </body>
 </html>

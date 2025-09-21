@@ -115,3 +115,36 @@
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
   });
+
+ document.addEventListener('DOMContentLoaded', () => {
+            const certificadosSection = document.getElementById('certificados');
+            const imageModal = document.getElementById('image-modal');
+            const modalImage = document.getElementById('modal-image');
+            const closeButton = document.querySelector('.image-modal-close');
+
+            if (certificadosSection && imageModal && modalImage && closeButton) {
+                // Adiciona um listener de clique na seção de certificados
+                certificadosSection.addEventListener('click', (event) => {
+                    const card = event.target.closest('.card');
+                    if (card) {
+                        const img = card.querySelector('img');
+                        if (img && img.src) {
+                            // Define a fonte da imagem do modal e a exibe
+                            modalImage.src = img.src;
+                            imageModal.style.display = 'flex';
+                        }
+                    }
+                });
+
+                // Fecha o modal ao clicar no botão de fechar ou fora da imagem
+                closeButton.addEventListener('click', () => {
+                    imageModal.style.display = 'none';
+                });
+
+                imageModal.addEventListener('click', (event) => {
+                    if (event.target === imageModal) {
+                        imageModal.style.display = 'none';
+                    }
+                });
+            }
+        });

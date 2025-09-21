@@ -435,13 +435,53 @@ section.visible > * {
     opacity: 0;
     transform: translateY(30px);
     transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.4s, text-shadow 0.4s;
+    cursor: pointer; 
+    overflow: hidden;
+    position: relative;
+
+    
 }
 
+
+.card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Cor de fundo escura com transparência */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0; /* Inicia com opacidade 0 */
+  transition: opacity 0.3s ease; /* Transição suave para o overlay */
+}
+
+.card .overlay i {
+  color: #fff;
+  font-size: 3rem; /* Tamanho adequado para o ícone */
+  opacity: 0; /* Inicia com opacidade 0 */
+  transform: scale(0.8); /* Inicia menor para um efeito de zoom */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Transição para o ícone */
+}
+
+/* Efeito de hover */
+.card:hover .overlay {
+  opacity: 1; /* Torna o overlay visível */
+}
+
+.card:hover .overlay i {
+  opacity: 1; /* Torna o ícone visível */
+  
+
+}
+
+
 .card img {
-    width: 100%;
     height: 100%;
     object-fit: contain; /* Garante que a imagem se ajuste sem ser distorcida */
     padding: 10px; /* Adiciona um pequeno espaçamento interno para as imagens */
+     transition: filter 0.3s ease;
 }
 
 
@@ -456,6 +496,53 @@ section.visible > * {
     text-shadow: 0 0 10px #c77dff, 0 0 20px #a64dff, 0 0 30px #e6e6fa;
     cursor: pointer;
 }
+
+
+  /* --- Modal de Imagem --- */
+        .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none; /* Inicia escondido */
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .image-modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            border: 4px solid #c77dff;
+            border-radius: 12px;
+            box-shadow: 0 0 30px #c77dff;
+            position: relative;
+        }
+
+        .image-modal-content img {
+            display: block;
+            width: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .image-modal-close:hover {
+            color: #c77dff;
+        }
+        
 
 /* --- Seção Contato --- */
 #contato {

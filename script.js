@@ -79,42 +79,83 @@
 
   homeObserver.observe(document.getElementById('home'));
 
+
+//   dark mode
+
   // Animação da malha quadriculada (mantida)
-  const canvas = document.getElementById('bg');
-  const ctx = canvas.getContext('2d');
-  let width = canvas.width = window.innerWidth;
-  let height = canvas.height = window.innerHeight;
-  const gridSize = 50;
-  const gridColor = 'rgba(200,200,255,0.05)';
+ const themeToggle = document.getElementById("theme-toggle");
+  const body = document.body;
+  const canvas = document.getElementById('bg');
 
-  function drawGrid(){
-    ctx.strokeStyle = gridColor;
-    ctx.lineWidth = 1;
-    for(let x=0;x<width;x+=gridSize){
-      ctx.beginPath();
-      ctx.moveTo(x,0);
-      ctx.lineTo(x,height);
-      ctx.stroke();
-    }
-    for(let y=0;y<height;y+=gridSize){
-      ctx.beginPath();
-      ctx.moveTo(0,y);
-      ctx.lineTo(width,y);
-      ctx.stroke();
-    }
-  }
+  // aplica o fundo do canvas a partir da variável CSS atual
+  function applyCanvasBackground() {
+    const bg = getComputedStyle(document.body).getPropertyValue('--background-color')?.trim() || '#0d0d0d';
+    canvas.style.background = bg;
+  }
 
-  function animate(){
-    ctx.clearRect(0,0,width,height);
-    drawGrid();
-    requestAnimationFrame(animate);
-  }
-  animate();
+  // inicializa ícone e tema a partir do localStorage
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    body.classList.add('light-mode');
+    themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+  } else {
+    body.classList.remove('light-mode');
+    themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
+  }
+  applyCanvasBackground(); // garante que o canvas já esteja coerente no load
 
-  window.addEventListener('resize',()=>{
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-  });
+  // alterna tema ao clicar e salva escolha
+  themeToggle.addEventListener('click', () => {
+    const isLight = body.classList.toggle('light-mode');
+    if (isLight) {
+      localStorage.setItem('theme', 'light');
+      themeToggle.innerHTML = '<i class="bi bi-sun-fill"></i>';
+    } else {
+      localStorage.setItem('theme', 'dark');
+      themeToggle.innerHTML = '<i class="bi bi-moon-stars-fill"></i>';
+    }
+    applyCanvasBackground(); // atualiza fundo do canvas imediatamente
+  });
+
+  /* Grid / partículas: use a variável --grid-color dinamicamente */
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
+  const gridSize = 50;
+
+  function drawGrid(){
+    // pega a cor da variável CSS (trim para remover quebras)
+    const gridColor = getComputedStyle(document.body).getPropertyValue('--grid-color')?.trim() || 'rgba(200,200,255,0.05)';
+    ctx.strokeStyle = gridColor;
+    ctx.lineWidth = 1;
+    for(let x=0;x<width;x+=gridSize){
+      ctx.beginPath();
+      ctx.moveTo(x,0);
+      ctx.lineTo(x,height);
+      ctx.stroke();
+    }
+    for(let y=0;y<height;y+=gridSize){
+      ctx.beginPath();
+      ctx.moveTo(0,y);
+      ctx.lineTo(width,y);
+      ctx.stroke();
+    }
+  }
+
+  function animate(){
+    ctx.clearRect(0,0,width,height);
+    drawGrid();
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  window.addEventListener('resize', ()=>{
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+    applyCanvasBackground(); // reajusta se necessário
+  });
+
+//   dark mode
 
  document.addEventListener('DOMContentLoaded', () => {
             const certificadosSection = document.getElementById('certificados');
@@ -148,3 +189,9 @@
                 });
             }
         });
+
+// dark mode
+
+
+
+// dark mode

@@ -254,6 +254,26 @@ nav a.active {
     border-bottom: 2px solid #c77dff;
 }
 
+
+/* dark mode */
+
+
+/* === Header === */
+header {
+  background: var(--header-bg);
+  backdrop-filter: blur(6px);
+  transition: background 0.45s ease;
+}
+header nav a {
+  color: var(--text-color);
+  transition: color 0.3s;
+}
+header nav a:hover {
+  color: var(--purple-light);
+}
+
+/* dark mode */
+
 /* --- Seções Gerais --- */
 section {
     padding: 60px 20px;
@@ -688,3 +708,80 @@ section.visible > * {
     0% { background-position-x: -1000px; }
     100% { background-position-x: 0px; }
 }
+
+
+:root {
+  /* Tema Escuro (default) */
+  --background-color: #0d0d0d;
+  --text-color: #eae6ff;                 /* texto quase branco */
+  --heading-color: #c77dff;              /* títulos com destaque */
+  --purple-light: #c77dff;
+  --purple-medium: #a64dff;
+  --card-bg: rgba(202, 143, 236, 0.08);
+  --card-shadow: 0 0 15px rgba(199, 125, 255, 0.25);
+  --social-bg: rgba(58, 3, 78, 0.5);
+  --social-color: #c77dff;
+  --social-hover: #e0b3ff;
+  --header-bg: rgba(13, 13, 13, 0.8);
+  --grid-color: rgba(200,200,255,0.05);
+}
+
+body.light-mode {
+  /* Tema Claro */
+  --background-color: #ffffff;
+  --text-color: #333333;                 /* texto escuro */
+  --heading-color: #5a2ca0;              /* roxo profundo */
+  --purple-light: #8a2be2;
+  --purple-medium: #9370db;
+  --card-bg: #ebdcff99;
+  --card-shadow: 0 0 12px rgba(138, 43, 226, 0.2);
+  --social-bg: #f8f8ff;
+  --social-color: #8a2be2;
+  --social-hover: #6a0dad;
+  --header-bg: rgba(255, 255, 255, 0.8);
+  --grid-color: #8a2be226;
+}
+
+p.light-mode {
+    color: var(--text-color);
+}
+
+/* === Textos === */
+body {
+  background: var(--background-color);
+  color: var(--text-color);
+  font-family: "Poppins", sans-serif;
+  transition: background 0.45s ease, color 0.45s ease;
+}
+h1, h2, h3, h4 {
+  color: var(--heading-color);
+  text-shadow: 0 0 6px var(--purple-light);
+  transition: color 0.45s ease, text-shadow 0.45s ease;
+}
+
+/* === Header === */
+header {
+  background: var(--header-bg);
+  backdrop-filter: blur(6px);
+  transition: background 0.45s ease;
+}
+header nav a {
+  color: var(--text-color);
+  transition: color 0.3s;
+}
+header nav a:hover {
+  color: var(--purple-light);
+}
+
+
+/* botão do tema (sem alteração lógica) */
+#theme-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin-left: 20px;
+  transition: color 0.3s;
+}
+#theme-toggle:hover { color: var(--purple-light); }

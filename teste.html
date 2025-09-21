@@ -1,0 +1,204 @@
+<div id="projetos" class="tab-content active">
+  <style>
+    #projetos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+        height: 500px;  /* ← aqui você define a altura fixa */
+
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 25px #c77dff, 0 0 40px #a64dff;
+    }
+
+    /* Slideshow */
+    .slideshow {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+    }
+
+    .slideshow img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .slideshow img.active {
+      opacity: 1;
+    }
+
+    /* Botões de navegação */
+    .prev, .next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.4);
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 18px;
+      border-radius: 50%;
+      transition: background 0.3s;
+      z-index: 10;
+    }
+
+    .prev:hover, .next:hover {
+      background: rgba(0,0,0,0.7);
+    }
+
+    .prev { left: 10px; }
+    .next { right: 10px; }
+
+    .card-content {
+      padding: 15px;
+      color: #333333;
+    }
+
+    .card-content h3 {
+      margin-bottom: 10px;
+      color: #5a008a;
+      text-shadow: 0 0 4px rgba(199, 125, 255, 0.5);
+    }
+
+    .card-content p {
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin-bottom: 15px;
+      color: #444444;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .card-actions .btn {
+      flex: 1;
+      padding: 8px 12px;
+      text-align: center;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      color: #ffffff;
+      background: #c77dff;
+      box-shadow: 0 0 10px #a64dff;
+    }
+
+    .card-actions .btn.github {
+      background: #5a008a;
+    }
+
+    .card-actions .btn:hover {
+      box-shadow: 0 0 20px #c77dff, 0 0 35px #a64dff;
+      transform: scale(1.05);
+    }
+  </style>
+
+  <!-- Card Projeto 1 -->
+  <div class="card">
+    <div class="slideshow">
+      <img src="img-slideshow/img_inicio.png" class="active" alt="Projeto 1 - Imagem 1">
+      <img src="img-slideshow/img_instrumentos_destaque.png" alt="Projeto 1 - Imagem 2">
+      <img src="img-slideshow/img_afinador.png" alt="Projeto 1 - Imagem 3">
+       <img src="img-slideshow/img_violino_catalogo.png" alt="Projeto 1 - Imagem 3">
+        <img src="img-slideshow/img_modal_violino.png" alt="Projeto 1 - Imagem 3">
+         <img src="img-slideshow/img_carrinho.png" alt="Projeto 1 - Imagem 3">
+          <img src="img-slideshow/img_pagamento_pix.png" alt="Projeto 1 - Imagem 3">
+      <button class="prev">❮</button>
+      <button class="next">❯</button>
+    </div>
+    <div class="card-content">
+      <h3>Projeto 1</h3>
+      <p>Site responsivo desenvolvido em HTML, CSS e JS. Catálogo digital com design moderno.</p>
+      <div class="card-actions">
+        <a href="https://seuprojeto.com" target="_blank" class="btn">🔗 Acessar</a>
+        <a href="https://github.com/seuusuario/projeto1" target="_blank" class="btn github">🐙 Código</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card Projeto 2 -->
+  <div class="card">
+    <div class="slideshow">
+      <img src="img/html (2).png" class="active" alt="Projeto 2 - Imagem 1">
+      <img src="img/js.png" alt="Projeto 2 - Imagem 2">
+      <img src="img/profile picture.jpg" alt="Projeto 2 - Imagem 3">
+      <button class="prev">❮</button>
+      <button class="next">❯</button>
+    </div>
+    <div class="card-content">
+      <h3>Projeto 2</h3>
+      <p>Aplicação em PHP integrada a banco de dados, com sistema de login e CRUD.</p>
+      <div class="card-actions">
+        <a href="https://seuprojeto.com" target="_blank" class="btn">🔗 Acessar</a>
+        <a href="https://github.com/seuusuario/projeto2" target="_blank" class="btn github">🐙 Código</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Slideshow automático + manual
+    document.querySelectorAll(".slideshow").forEach(slideshow => {
+      let slides = slideshow.querySelectorAll("img");
+      let prevBtn = slideshow.querySelector(".prev");
+      let nextBtn = slideshow.querySelector(".next");
+      let index = 0;
+      let interval;
+
+      function showSlide(i) {
+        slides.forEach(s => s.classList.remove("active"));
+        slides[i].classList.add("active");
+      }
+
+      function nextSlide() {
+        index = (index + 1) % slides.length;
+        showSlide(index);
+      }
+
+      function prevSlide() {
+        index = (index - 1 + slides.length) % slides.length;
+        showSlide(index);
+      }
+
+      nextBtn.addEventListener("click", () => {
+        nextSlide();
+        resetInterval();
+      });
+
+      prevBtn.addEventListener("click", () => {
+        prevSlide();
+        resetInterval();
+      });
+
+      function startAuto() {
+        interval = setInterval(nextSlide, 3000);
+      }
+
+      function resetInterval() {
+        clearInterval(interval);
+        startAuto();
+      }
+
+      startAuto();
+    });
+  </script>
+</div>

@@ -279,3 +279,25 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 });
+
+
+// responsividade
+
+// Seleciona o botão e o menu de navegação
+const menuToggle = document.getElementById('menu-toggle');
+const nav = document.querySelector('nav');
+
+// Adiciona um evento de clique no botão
+menuToggle.addEventListener('click', () => {
+    // Alterna a classe 'active' na navegação
+    nav.classList.toggle('active');
+});
+
+// Opcional: Esconde o menu quando um link é clicado
+document.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', () => {
+        nav.classList.remove('active');
+    });
+});
+
+// responsividade

@@ -1,33 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 <div id="projetos" class="tab-content active">
   <style>
     #projetos {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 20px;
-      padding: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      padding: 30px;
     }
 
-    .card {
-      background: #ffffff;
+    .card-projeto {
+    background: rgba(202, 143, 236, 0.101);
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 0 12px rgba(0,0,0,0.2);
       transition: transform 0.3s, box-shadow 0.3s;
       position: relative;
-        height: 500px;  /* ← aqui você define a altura fixa */
-
+      display: flex;
+      flex-direction: column; 
+      cursor: pointer;
     }
 
-    .card:hover {
+    .card-projeto:hover {
       transform: translateY(-6px);
       box-shadow: 0 0 25px #c77dff, 0 0 40px #a64dff;
     }
 
-    /* Slideshow */
+    /* Slideshow maior */
     .slideshow {
       position: relative;
       width: 100%;
-      height: 180px;
+      height: 500px; /* aumentado */
       overflow: hidden;
     }
 
@@ -52,9 +61,9 @@
       background: rgba(0,0,0,0.4);
       color: #fff;
       border: none;
-      padding: 8px 12px;
+      padding: 12px 16px;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 22px;
       border-radius: 50%;
       transition: background 0.3s;
       z-index: 10;
@@ -64,35 +73,44 @@
       background: rgba(0,0,0,0.7);
     }
 
-    .prev { left: 10px; }
-    .next { right: 10px; }
+    .prev { left: 15px; }
+    .next { right: 15px; }
 
-    .card-content {
-      padding: 15px;
+    /* Texto abaixo */
+    .card-content-projeto {
+      padding: 20px;
       color: #333333;
+      text-align: left;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    .card-content h3 {
+    .card-content-projeto h3 {
       margin-bottom: 10px;
-      color: #5a008a;
+      color: #a348d4;
+      font-size: 1.4rem;
       text-shadow: 0 0 4px rgba(199, 125, 255, 0.5);
     }
 
-    .card-content p {
-      font-size: 0.9rem;
-      line-height: 1.4;
-      margin-bottom: 15px;
-      color: #444444;
+    .card-content-projeto p {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-bottom: 20px;
+      color: white;
     }
 
+    /* Botões */
     .card-actions {
       display: flex;
-      gap: 10px;
+      gap: 12px;
+      margin-top: auto;
     }
 
     .card-actions .btn {
       flex: 1;
-      padding: 8px 12px;
+      padding: 10px 14px;
       text-align: center;
       border-radius: 8px;
       text-decoration: none;
@@ -101,6 +119,7 @@
       color: #ffffff;
       background: #c77dff;
       box-shadow: 0 0 10px #a64dff;
+      font-size: 0.95rem;
     }
 
     .card-actions .btn.github {
@@ -114,7 +133,7 @@
   </style>
 
   <!-- Card Projeto 1 -->
-  <div class="card">
+  <div class="card-projeto">
     <div class="slideshow">
       <img src="img-slideshow/img_inicio.png" class="active" alt="Projeto 1 - Imagem 1">
       <img src="img-slideshow/img_instrumentos_destaque.png" alt="Projeto 1 - Imagem 2">
@@ -126,31 +145,31 @@
       <button class="prev">❮</button>
       <button class="next">❯</button>
     </div>
-    <div class="card-content">
-      <h3>Projeto 1</h3>
-      <p>Site responsivo desenvolvido em HTML, CSS e JS. Catálogo digital com design moderno.</p>
+    <div class="card-content-projeto">
+      <h3> Projeto MusicWave: E-commerce inovador</h3>
+      <p>Site responsivo desenvolvido em HTML, CSS e JS. E-commerce de instrumentos musicais de corda, acompanhado de um afinador on-line funcional.</p>
       <div class="card-actions">
-        <a href="https://seuprojeto.com" target="_blank" class="btn">🔗 Acessar</a>
-        <a href="https://github.com/seuusuario/projeto1" target="_blank" class="btn github">🐙 Código</a>
+        <a href="https://github.com/EllisCarvalho3/projeto_interdisciplinar.git" target="_blank" class="btn">🔗 Acessar</a>
+        <a href="https://github.com/EllisCarvalho3/projeto_interdisciplinar.git" target="_blank" class="btn github"> Código</a>
       </div>
     </div>
   </div>
 
   <!-- Card Projeto 2 -->
-  <div class="card">
+  <div class="card-projeto">
     <div class="slideshow">
-      <img src="img/html (2).png" class="active" alt="Projeto 2 - Imagem 1">
-      <img src="img/js.png" alt="Projeto 2 - Imagem 2">
-      <img src="img/profile picture.jpg" alt="Projeto 2 - Imagem 3">
+      <img src="img-slideshow/img_lina.png" class="active" alt="Projeto 2 - Imagem 1">
+      <img src="img-slideshow/img_tv.jpg" alt="Projeto 2 - Imagem 2">
+      <img src="img-slideshow/img_tv2.jpg" alt="Projeto 2 - Imagem 3">
       <button class="prev">❮</button>
       <button class="next">❯</button>
     </div>
-    <div class="card-content">
-      <h3>Projeto 2</h3>
-      <p>Aplicação em PHP integrada a banco de dados, com sistema de login e CRUD.</p>
+    <div class="card-content-projeto">
+      <h3>Projeto Terra Viva</h3>
+      <p>Jogo educativo desenvolvido com base no tema "Educação Ambiental e Educação para consumo", focado no descarte correto de resíduos, onde o jogador coleta e recicla lixo, aprendendo sobre preservação ambiental e consumo consciente. A cada ação, ele entende o impacto de suas escolhas no ecossistema, enfrentando consequências como poluição e falta de recursos.</p>
       <div class="card-actions">
-        <a href="https://seuprojeto.com" target="_blank" class="btn">🔗 Acessar</a>
-        <a href="https://github.com/seuusuario/projeto2" target="_blank" class="btn github">🐙 Código</a>
+        <a href="#" target="_blank" class="btn">🔗 Acessar</a>
+        <a href="#" target="_blank" class="btn github">🐙 Código</a>
       </div>
     </div>
   </div>
@@ -202,3 +221,9 @@
     });
   </script>
 </div>
+
+
+</body>
+</html>
+
+

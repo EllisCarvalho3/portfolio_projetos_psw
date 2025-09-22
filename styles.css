@@ -428,6 +428,7 @@ section.visible > * {
     color: #0d0d0d;
 }
 
+/* Esconde todo o conteúdo da aba por padrão */
 .tab-content {
     display: none;
     gap: 20px;
@@ -436,9 +437,17 @@ section.visible > * {
     width: 100%;
 }
 
+/* Mostra apenas a aba que tiver a classe 'active' */
 .tab-content.active {
     display: flex;
-    
+}
+
+/* Aplica o layout de grade APENAS quando a aba de projetos estiver ativa */
+#projetos.active {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 30px;
 }
 
 /* --- Cards de Projetos --- */
@@ -566,6 +575,109 @@ section.visible > * {
         .image-modal-close:hover {
             color: #c77dff;
         }
+
+
+
+#projetos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 30px;
+  }
+
+ /* Aplica o layout de grade APENAS quando a aba de projetos estiver ativa */
+
+  .card-projeto {
+    background: rgba(202, 143, 236, 0.101);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 12px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .card-projeto:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 0 25px #c77dff, 0 0 40px #a64dff;
+  }
+  .slideshow {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+  }
+  .slideshow img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+  .slideshow img.active { opacity: 1; }
+  .prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    border: none;
+    padding: 12px 16px;
+    cursor: pointer;
+    font-size: 22px;
+    border-radius: 50%;
+    transition: background 0.3s;
+    z-index: 10;
+  }
+  .prev:hover, .next:hover { background: rgba(0,0,0,0.7); }
+  .prev { left: 15px; }
+  .next { right: 15px; }
+  .card-content-projeto {
+    padding: 20px;
+    color: #333333;
+    text-align: left;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card-content-projeto h3 {
+    margin-bottom: 10px;
+    color: #a348d4;
+    font-size: 1.4rem;
+    text-shadow: 0 0 4px rgba(199, 125, 255, 0.5);
+  }
+  .card-content-projeto p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: white;
+  }
+  .card-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: auto;
+  }
+  .card-actions .btn {
+    flex: 1;
+    padding: 10px 14px;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+    color: #ffffff;
+    background: #c77dff;
+    box-shadow: 0 0 10px #a64dff;
+    font-size: 0.95rem;
+  }
+  .card-actions .btn.github { background: #5a008a; }
+  .card-actions .btn:hover {
+    box-shadow: 0 0 20px #c77dff, 0 0 35px #a64dff;
+    transform: scale(1.05);
+  }        
         
 
 /* --- Seção Contato --- */

@@ -190,8 +190,145 @@
             }
         });
 
-// dark mode
+// Slideshow automático + manual
+  document.querySelectorAll(".slideshow").forEach(slideshow => {
+    let slides = slideshow.querySelectorAll("img");
+    let prevBtn = slideshow.querySelector(".prev");
+    let nextBtn = slideshow.querySelector(".next");
+    let index = 0;
+    let interval;
 
+    function showSlide(i) {
+      slides.forEach(s => s.classList.remove("active"));
+      slides[i].classList.add("active");
+    }
+    function nextSlide() {
+      index = (index + 1) % slides.length;
+      showSlide(index);
+    }
+    function prevSlide() {
+      index = (index - 1 + slides.length) % slides.length;
+      showSlide(index);
+    }
+    nextBtn.addEventListener("click", () => {
+      nextSlide();
+      resetInterval();
+    });
+    prevBtn.addEventListener("click", () => {
+      prevSlide();
+      resetInterval();
+    });
+    function startAuto() { interval = setInterval(nextSlide, 3000); }
+    function resetInterval() { clearInterval(interval); startAuto(); }
+    startAuto();
+  });
 
+/* --- Script Completo e Corrigido --- */
+(function() {
+    // === Seletores de Elementos ===
+    const header = document.querySelector('header');
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('header nav a[href^="#"]');
+    const tabs = document.querySelectorAll('.tabs button');
+    const tabContents = document.querySelectorAll('.tab-content');
 
-// dark mode
+    // === Ajustes para Fixed Header e Intersection Observer ===
+    function updateScrollMargin() {
+        const headerHeight = header ? header.offsetHeight : 80;
+        sections.forEach(sec => {
+            sec.style.scrollMarginTop = (headerHeight + 16) + 'px';
+        });
+    }
+    updateScrollMargin();
+    window.addEventListener('resize', updateScrollMargin);
+
+    // Função que revela a seção (adiciona .visible e anima elementos internos)
+    function revealSection(sec) {
+        if (!sec.classList.contains('visible')) {
+            sec.classList.add('visible');
+            const elements = Array.from(sec.children);
+            elements.forEach((el, i) => {
+                el.style.transitionDelay = `${i * 0.12}s`;
+                el.classList.add('visible');
+            });
+            const cards = sec.querySelectorAll('.card, .card-projeto, .card .card-content, .card-content, .card-actions');
+            cards.forEach((card, i) => {
+                setTimeout(() => card.classList.add('visible'), i * 100);
+            });
+        }
+    }
+
+    let sectionObserver;
+    function createObserver() {
+        const headerHeight = header ? header.offsetHeight : 80;
+        const rootMargin = `-${headerHeight + 8}px 0px -20% 0px`;
+        sectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    revealSection(entry.target);
+                }
+            });
+        }, {
+            root: null,
+            rootMargin,
+            threshold: 0.12
+        });
+        sections.forEach(s => sectionObserver.observe(s));
+    }
+    createObserver();
+    window.addEventListener('resize', () => {
+        if (sectionObserver) sectionObserver.disconnect();
+        createObserver();
+        updateScrollMargin();
+    });
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            const href = link.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
+            const id = href.slice(1);
+            const target = document.getElementById(id);
+            if (!target) return;
+            setTimeout(() => revealSection(target), 250);
+        });
+    });
+
+    // Revele seções já visíveis no load
+    sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            revealSection(sec);
+        }
+    });
+
+    // === Gerenciamento de Abas (Tabs) ---
+    // Esta função agora é independente e não interfere com a animação por scroll
+    function setupTabs() {
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetId = tab.dataset.tab;
+
+                // Remove a classe 'active' de todos os botões e conteúdos
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Adiciona a classe 'active' apenas ao botão e conteúdo clicados
+                tab.classList.add('active');
+                const targetContent = document.getElementById(targetId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+
+        // Força a ativação da aba de projetos ao carregar a página
+        const projetosTab = document.querySelector('button[data-tab="projetos"]');
+        if (projetosTab) {
+            projetosTab.click();
+        }
+    }
+
+    // Chama a função para configurar o sistema de abas
+    setupTabs();
+
+})();

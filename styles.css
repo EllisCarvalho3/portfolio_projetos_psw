@@ -1078,63 +1078,15 @@ body.light-mode {
 }
 
 /* --- Media Query Mobile (≤768px) --- */
-@media (max-width: 768px) {
-
-    /* Anulação da transição de scroll */
-    section, section > * {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
-
-    /* Ajuste do layout geral */
-    body {
-        font-size: 16px;
-    }
-
-    section {
-        flex-direction: column;
-        padding: 40px 15px;
-        min-height: auto;
-    }
-
-    h1, h2, h3, h4 {
-        font-size: 1.8rem;
-    }
-
-    p {
-        font-size: 1rem;
-    }
-
-    /* Cabeçalho e navegação */
-    header {
-        padding: 1rem 1.5rem;
-        justify-content: space-between;
-    }
-
-#menu-toggle {
-    display: none; /* escondido no desktop */
-}
-
-#theme-toggle {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5rem;
-    color: var(--text-color);
-    margin-left: 20px;
-    transition: color 0.3s;
-}
-
-#theme-toggle:hover {
-    color: var(--purple-light);
-}
-
 /* --- Mobile --- */
 @media (max-width: 768px) {
     header {
         padding: 1rem 1.5rem;
         justify-content: space-between;
+    }
+
+    .text h1 {
+        margin-top: 50px;
     }
 
     #menu-toggle {
@@ -1145,8 +1097,7 @@ body.light-mode {
         font-size: 2rem;
         color: var(--text-color);
         z-index: 1100; /* acima do nav */
-            margin-right: 80px; /* aproxima do centro */
-
+        margin-right: 80px; /* aproxima do centro */
     }
 
     nav {
@@ -1180,7 +1131,6 @@ body.light-mode {
     #theme-toggle {
         margin-left: 0;
     }
-}
 
     /* Seção Início e Sobre */
     #home, #sobre {
@@ -1189,11 +1139,22 @@ body.light-mode {
         gap: 30px;
     }
 
+    /* h1 da Home mais abaixo */
+    #home h1 {
+        margin-top: 120px;
+    }
+
     #home img,
     #sobre .foto {
         width: 250px;
         height: 250px;
         margin-top: 20px;
+    }
+
+    /* Texto menor na seção Sobre */
+    #sobre p {
+        font-size: 1rem;
+        line-height: 1.6;
     }
 
     /* Portfólio */
@@ -1222,10 +1183,52 @@ body.light-mode {
         height: 350px;
     }
 
+    /* Ajuste proporcional dos cards de projetos */
+    .projeto-card {
+        min-width: 400px;
+        min-height: 480px;
+    }
+
+    .projeto-card .slideshow-container {
+        height: 500px;
+    }
+
+    /* Certificados: 5 em cima, 4 embaixo */
+    #certificados {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 15px;
+        justify-items: center;
+    }
+
+    #certificados .card {
+        width: 180px;
+        height: 130px;
+    }
+
+    /* No mobile, 2 por linha */
+    @media (max-width: 480px) {
+        #certificados {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    /* Tecnologias: 2x2 */
+    #tecnologias {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        justify-items: center;
+    }
+
+    #tecnologias .card {
+        width: 150px;
+        height: 150px;
+    }
+
     /* Contato */
     #contato .socials {
         flex-wrap: wrap;
         justify-content: center;
     }
 }
-    /* responsividade */

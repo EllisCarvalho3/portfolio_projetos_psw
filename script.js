@@ -1,85 +1,3 @@
-// Tabs Portfolio (mantido)
-  const tabs = document.querySelectorAll('.tabs button');
-  const contents = document.querySelectorAll('.tab-content');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      tabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      contents.forEach(c => c.classList.remove('active'));
-      const activeContent = document.getElementById(tab.dataset.tab);
-      activeContent.classList.add('active');
-      const cards = activeContent.querySelectorAll('.card');
-      cards.forEach((card,i)=>{ card.classList.remove('visible'); setTimeout(()=>card.classList.add('visible'),i*150); });
-    });
-  });
-
-  // 1. Marcação das seções na navegação
-  // 2. Efeito de scroll ativo
-  const navLinks = document.querySelectorAll('nav a');
-  const sections = document.querySelectorAll('section');
-
-  const options = {
-    root: null,
-    rootMargin: '0px',
-    // O threshold determina quando o evento será acionado.
-    // 0.7 significa que o evento será acionado quando 70% da seção estiver visível.
-    // Isso garante que a seção só "apareça" quando você estiver realmente nela.
-    threshold: 0.7 
-  };
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // Adiciona a classe 'visible' à seção quando ela entra na viewport
-        entry.target.classList.add('visible');
-
-        // Encontra o link de navegação correspondente
-        const currentId = entry.target.id;
-        navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href').substring(1) === currentId) {
-            link.classList.add('active');
-          }
-        });
-      } else {
-        // Remove a classe 'visible' quando a seção sai da viewport
-        entry.target.classList.remove('visible');
-      }
-    });
-  }, options);
-
-  sections.forEach(section => {
-    observer.observe(section);
-  });
-
-  // Efeito de digitação corrigido na seção Home
-  function startTypingEffect() {
-    const h1 = document.getElementById('home').querySelector('h1');
-    const h2 = document.getElementById('home').querySelector('h2');
-    
-    h1.style.animation = 'typing 2s steps(15) forwards, blink 0.75s step-end infinite';
-    
-    // Atraso para a animação do h2 começar após a do h1
-    h2.style.animation = 'none'; // Reseta a animação antes de iniciar
-    setTimeout(() => {
-      h2.style.animation = 'typing2 2s steps(10) forwards, blink 0.75s step-end infinite';
-    }, 2000); // 2 segundos de atraso (duração da animação do h1)
-  }
-
-  // Observa a seção Home e inicia a animação apenas quando ela está visível
-  const homeObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        startTypingEffect();
-        // Para de observar após a primeira vez para não reiniciar
-        homeObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.5 }); // Inicia quando metade da seção Home está visível
-
-  homeObserver.observe(document.getElementById('home'));
-
-
 //   dark mode
 
   // Animação da malha quadriculada (mantida)
@@ -157,6 +75,42 @@
 
 //   dark mode
 
+// Efeito de digitação corrigido na seção Home
+  function startTypingEffect() {
+    const h1 = document.getElementById('home').querySelector('h1');
+    const h2 = document.getElementById('home').querySelector('h2');
+    
+    h1.style.animation = 'typing 2s steps(15) forwards, blink 0.75s step-end infinite';
+    
+    // Atraso para a animação do h2 começar após a do h1
+    h2.style.animation = 'none'; // Reseta a animação antes de iniciar
+    setTimeout(() => {
+      h2.style.animation = 'typing2 2s steps(10) forwards, blink 0.75s step-end infinite';
+    }, 2000); // 2 segundos de atraso (duração da animação do h1)
+  }
+
+  // Observa a seção Home e inicia a animação apenas quando ela está visível
+  const homeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        startTypingEffect();
+        // Para de observar após a primeira vez para não reiniciar
+        homeObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 }); // Inicia quando metade da seção Home está visível
+
+  homeObserver.observe(document.getElementById('home'));
+
+
+
+
+
+
+
+//modal de certificados
+
+
  document.addEventListener('DOMContentLoaded', () => {
             const certificadosSection = document.getElementById('certificados');
             const imageModal = document.getElementById('image-modal');
@@ -190,145 +144,138 @@
             }
         });
 
-// Slideshow automático + manual
-  document.querySelectorAll(".slideshow").forEach(slideshow => {
-    let slides = slideshow.querySelectorAll("img");
-    let prevBtn = slideshow.querySelector(".prev");
-    let nextBtn = slideshow.querySelector(".next");
-    let index = 0;
-    let interval;
 
-    function showSlide(i) {
-      slides.forEach(s => s.classList.remove("active"));
-      slides[i].classList.add("active");
-    }
-    function nextSlide() {
-      index = (index + 1) % slides.length;
-      showSlide(index);
-    }
-    function prevSlide() {
-      index = (index - 1 + slides.length) % slides.length;
-      showSlide(index);
-    }
-    nextBtn.addEventListener("click", () => {
-      nextSlide();
-      resetInterval();
-    });
-    prevBtn.addEventListener("click", () => {
-      prevSlide();
-      resetInterval();
-    });
-    function startAuto() { interval = setInterval(nextSlide, 3000); }
-    function resetInterval() { clearInterval(interval); startAuto(); }
-    startAuto();
-  });
+//modal de certificados
 
-/* --- Script Completo e Corrigido --- */
-(function() {
-    // === Seletores de Elementos ===
-    const header = document.querySelector('header');
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('header nav a[href^="#"]');
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    // Variaveis e funções do Slideshow (mantidas)
+    let slideIndex1 = 0;
+    let slideIndex2 = 0;
+    let slideshowInterval1;
+    let slideshowInterval2;
+
+    function showSlides1() {
+        const slides = document.getElementsByClassName("mySlides1");
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex1++;
+        if (slideIndex1 > slides.length) { slideIndex1 = 1; }
+        slides[slideIndex1 - 1].style.display = "block";
+    }
+
+    function showSlides2() {
+        const slides = document.getElementsByClassName("mySlides2");
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex2++;
+        if (slideIndex2 > slides.length) { slideIndex2 = 1; }
+        slides[slideIndex2 - 1].style.display = "block";
+    }
+
+    // Funções de navegação manual do slideshow (mantidas)
+    window.plusSlides1 = function(n) {
+        clearInterval(slideshowInterval1);
+        slideIndex1 += n;
+        const slides = document.getElementsByClassName("mySlides1");
+        if (slideIndex1 > slides.length) { slideIndex1 = 1; }
+        if (slideIndex1 < 1) { slideIndex1 = slides.length; }
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex1 - 1].style.display = "block";
+        slideshowInterval1 = setInterval(showSlides1, 5000);
+    }
+
+    window.plusSlides2 = function(n) {
+        clearInterval(slideshowInterval2);
+        slideIndex2 += n;
+        const slides = document.getElementsByClassName("mySlides2");
+        if (slideIndex2 > slides.length) { slideIndex2 = 1; }
+        if (slideIndex2 < 1) { slideIndex2 = slides.length; }
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex2 - 1].style.display = "block";
+        slideshowInterval2 = setInterval(showSlides2, 5000);
+    }
+
+    // Lógica das abas e da animação dos cards
     const tabs = document.querySelectorAll('.tabs button');
-    const tabContents = document.querySelectorAll('.tab-content');
+    const contents = document.querySelectorAll('.tab-content');
 
-    // === Ajustes para Fixed Header e Intersection Observer ===
-    function updateScrollMargin() {
-        const headerHeight = header ? header.offsetHeight : 80;
-        sections.forEach(sec => {
-            sec.style.scrollMarginTop = (headerHeight + 16) + 'px';
-        });
-    }
-    updateScrollMargin();
-    window.addEventListener('resize', updateScrollMargin);
+    // Função que inicia o conteúdo das abas e as animações
+    function activateTab(tabId) {
+        // Remove a classe 'active' de todos os botoes e conteúdos
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
 
-    // Função que revela a seção (adiciona .visible e anima elementos internos)
-    function revealSection(sec) {
-        if (!sec.classList.contains('visible')) {
-            sec.classList.add('visible');
-            const elements = Array.from(sec.children);
-            elements.forEach((el, i) => {
-                el.style.transitionDelay = `${i * 0.12}s`;
-                el.classList.add('visible');
-            });
-            const cards = sec.querySelectorAll('.card, .card-projeto, .card .card-content, .card-content, .card-actions');
+        // Ativa o botão e o conteúdo correspondente
+        const activeTabButton = document.querySelector(`[data-tab="${tabId}"]`);
+        const activeContent = document.getElementById(tabId);
+        
+        if (activeTabButton && activeContent) {
+            activeTabButton.classList.add('active');
+            activeContent.classList.add('active');
+            
+            // Lógica para controle dos Slideshows
+            if (tabId === 'projetos') {
+                showSlides1();
+                showSlides2();
+                slideshowInterval1 = setInterval(showSlides1, 5000);
+                slideshowInterval2 = setInterval(showSlides2, 5000);
+            } else {
+                clearInterval(slideshowInterval1);
+                clearInterval(slideshowInterval2);
+            }
+            
+            // Animação de entrada dos cards
+            const cards = activeContent.querySelectorAll('.card');
             cards.forEach((card, i) => {
-                setTimeout(() => card.classList.add('visible'), i * 100);
+                card.classList.remove('visible');
+                // Use setTimeout para aplicar a animação com atraso
+                setTimeout(() => card.classList.add('visible'), i * 150);
             });
         }
     }
 
-    let sectionObserver;
-    function createObserver() {
-        const headerHeight = header ? header.offsetHeight : 80;
-        const rootMargin = `-${headerHeight + 8}px 0px -20% 0px`;
-        sectionObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    revealSection(entry.target);
-                }
-            });
-        }, {
-            root: null,
-            rootMargin,
-            threshold: 0.12
-        });
-        sections.forEach(s => sectionObserver.observe(s));
-    }
-    createObserver();
-    window.addEventListener('resize', () => {
-        if (sectionObserver) sectionObserver.disconnect();
-        createObserver();
-        updateScrollMargin();
-    });
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            const href = link.getAttribute('href');
-            if (!href || !href.startsWith('#')) return;
-            const id = href.slice(1);
-            const target = document.getElementById(id);
-            if (!target) return;
-            setTimeout(() => revealSection(target), 250);
+    // Adiciona evento de clique a todos os botões de aba
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            activateTab(tab.dataset.tab);
         });
     });
 
-    // Revele seções já visíveis no load
-    sections.forEach(sec => {
-        const rect = sec.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-            revealSection(sec);
-        }
-    });
+    // Ativa a primeira aba ao carregar a página
+    activateTab('projetos');
 
-    // === Gerenciamento de Abas (Tabs) ---
-    // Esta função agora é independente e não interfere com a animação por scroll
-    function setupTabs() {
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                const targetId = tab.dataset.tab;
 
-                // Remove a classe 'active' de todos os botões e conteúdos
-                tabs.forEach(t => t.classList.remove('active'));
-                tabContents.forEach(content => content.classList.remove('active'));
-
-                // Adiciona a classe 'active' apenas ao botão e conteúdo clicados
-                tab.classList.add('active');
-                const targetContent = document.getElementById(targetId);
-                if (targetContent) {
-                    targetContent.classList.add('active');
-                }
-            });
+    // Lógica para o efeito de scroll ativo (mantida)
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                const currentId = entry.target.id;
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').substring(1) === currentId) {
+                        link.classList.add('active');
+                    }
+                });
+            } else {
+                entry.target.classList.remove('visible');
+            }
         });
-
-        // Força a ativação da aba de projetos ao carregar a página
-        const projetosTab = document.querySelector('button[data-tab="projetos"]');
-        if (projetosTab) {
-            projetosTab.click();
-        }
-    }
-
-    // Chama a função para configurar o sistema de abas
-    setupTabs();
-
-})();
+    }, { root: null, rootMargin: '0px', threshold: 0.7 });
+    
+    sections.forEach(section => {
+        observer.observe(section);
+    });
+});

@@ -64,78 +64,140 @@
 </section>
 
 <section id="portfolio">
-  <h2>Portfolio</h2>
-  <div class="tabs">
-    <button class="active" data-tab="projetos">Projetos</button>
-    <button data-tab="certificados">Certificados</button>
-    <button data-tab="tecnologias">Tecnologias</button>
-  </div>
-
-  <!-- PROJETOS -->
-<div id="projetos" class="tab-content">
-        <div class="card-projeto">
-      <div class="slideshow">
-        <img src="img-slideshow/img_inicio.png" class="active" alt="Projeto 1 - Imagem 1">
-        <img src="img-slideshow/img_instrumentos_destaque.png" alt="Projeto 1 - Imagem 2">
-        <img src="img-slideshow/img_afinador.png" alt="Projeto 1 - Imagem 3">
-        <img src="img-slideshow/img_violino_catalogo.png" alt="Projeto 1 - Imagem 4">
-        <img src="img-slideshow/img_modal_violino.png" alt="Projeto 1 - Imagem 5">
-        <img src="img-slideshow/img_carrinho.png" alt="Projeto 1 - Imagem 6">
-        <img src="img-slideshow/img_pagamento_pix.png" alt="Projeto 1 - Imagem 7">
-        <button class="prev">❮</button>
-        <button class="next">❯</button>
-      </div>
-      <div class="card-content-projeto">
-        <h3>Projeto MusicWave: E-commerce inovador</h3>
-        <p>Site responsivo desenvolvido em HTML, CSS e JS. E-commerce de instrumentos musicais de corda, acompanhado de um afinador on-line funcional.</p>
-        <div class="card-actions">
-          <a href="https://github.com/EllisCarvalho3/projeto_interdisciplinar.git" target="_blank" class="btn">🔗 Acessar</a>
-          <a href="https://github.com/EllisCarvalho3/projeto_interdisciplinar.git" target="_blank" class="btn github">🐙 Código</a>
-        </div>
-      </div>
+    <h2>Portfólio</h2>
+    <div class="tabs">
+        <button class="active" data-tab="projetos">Projetos</button>
+        <button data-tab="certificados">Certificados</button>
+        <button data-tab="tecnologias">Tecnologias</button>
     </div>
-
-    <!-- Card Projeto 2 -->
-    <div class="card-projeto">
-      <div class="slideshow">
-        <img src="img-slideshow/img_lina.png" class="active" alt="Projeto 2 - Imagem 1">
-        <img src="img-slideshow/img_tv.jpg" alt="Projeto 2 - Imagem 2">
-        <img src="img-slideshow/img_tv2.jpg" alt="Projeto 2 - Imagem 3">
-        <button class="prev">❮</button>
-        <button class="next">❯</button>
-      </div>
-      <div class="card-content-projeto">
-        <h3>Projeto Terra Viva</h3>
-        <p>Jogo educativo desenvolvido com base no tema "Educação Ambiental e Educação para consumo", focado no descarte correto de resíduos, onde o jogador coleta e recicla lixo, aprendendo sobre preservação ambiental e consumo consciente. A cada ação, ele entende o impacto de suas escolhas no ecossistema, enfrentando consequências como poluição e falta de recursos.</p>
-        <div class="card-actions">
-          <a href="#" target="_blank" class="btn">🔗 Acessar</a>
-          <a href="#" target="_blank" class="btn github">🐙 Código</a>
+    <div id="projetos" class="tab-content active">
+        <div class="card projeto-card">
+            <div class="slideshow-container">
+                <div class="mySlides1 fade">
+                    <img src="img-slideshow/img_inicio.png" style="width:100%" alt="Projeto 1 - Imagem 1">
+                </div>
+                <div class="mySlides1 fade">
+                    <img src="img-slideshow/img_instrumentos_destaque.png" style="width:100%" alt="Projeto 1 - Imagem 2">
+                </div>
+                <div class="mySlides1 fade">
+                    <img src="img-slideshow/img_afinador.png" style="width:100%" alt="Projeto 1 - Imagem 3">
+                </div>
+                <div class="mySlides1 fade">
+                    <img src="img-slideshow/img_violino_catalogo.png" style="width:100%" alt="Projeto 1 - Imagem 3">
+                </div>
+                <div class="mySlides1 fade">
+                    <img src="img-slideshow/img_modal_violino.png" style="width:100%" alt="Projeto 1 - Imagem 3">
+                </div>
+                <div class="mySlides1 fade">
+                    <img src="img-slideshow/img_carrinho.png" style="width:100%" alt="Projeto 1 - Imagem 3">
+                </div>
+                <div class="mySlides1 fade">
+                    <img src="img-slideshow/img_pagamento_pix.png" style="width:100%" alt="Projeto 1 - Imagem 3">
+                </div>
+                <a class="prev" onclick="plusSlides1(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides1(1)">&#10095;</a>
+            </div>
+            <div class="projeto-info">
+                <h4> Projeto MusicWave: E-commerce inovador</h4>
+                <p>Site responsivo desenvolvido em HTML, CSS e JS. E-commerce de instrumentos musicais de corda, acompanhado de um afinador on-line funcional.</p>
+                <a href="https://github.com/EllisCarvalho3/projeto_interdisciplinar.git" target="_blank" class="btn-github">
+                    Ver no GitHub
+                </a>
+            </div>
         </div>
-      </div>
+        <div class="card projeto-card">
+            <div class="slideshow-container">
+                <div class="mySlides2 fade">
+                    <img src="img-slideshow/img_lina.png" style="width:100%" alt="Projeto 2 - Imagem 1">
+                </div>
+                <div class="mySlides2 fade">
+                    <img src="img-slideshow/img_tv.jpg" style="width:100%" alt="Projeto 2 - Imagem 2">
+                </div>
+                <div class="mySlides2 fade">
+                    <img src="img-slideshow/img_tv2.jpg" style="width:100%" alt="Projeto 2 - Imagem 3">
+                </div>
+                <a class="prev" onclick="plusSlides2(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides2(1)">&#10095;</a>
+            </div>
+            <div class="projeto-info">
+                <h4>Projeto Terra Viva</h4>
+                <p>Jogo educativo desenvolvido com base no tema "Educação Ambiental e Educação para consumo", focado no descarte correto de resíduos, onde o jogador coleta e recicla lixo, aprendendo sobre preservação ambiental e consumo consciente. A cada ação, ele entende o impacto de suas escolhas no ecossistema, enfrentando consequências como poluição e falta de recursos.</p>
+                <a href="https://github.com/seu-usuario/projeto-2" class="btn-github">
+                    Ver no GitHub
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
-
-  <!-- CERTIFICADOS -->
-  <div id="certificados" class="tab-content">
-    <div class="card"><img src="img-certificados/certificado_ifba.png"></div>
-    <div class="card"><img src="img-certificados/certificado_alura.png"></div>
-    <div class="card"><img src="img-certificados/certificado_obereri.jpg"></div>
-    <div class="card"><img src="img-certificados/certificado_drones.png"></div>
-    <div class="card"><img src="img-certificados/certificado_onhb.png"></div>
-    <div class="card"><img src="img-certificados/certificado_att.png"></div>
-    <div class="card"><img src="img-certificados/certificado_famif.png"></div>
-    <div class="card"><img src="img-certificados/certificado_ecodesfile.png"></div>
-    <div class="card"><img src="img-certificados/certificado_evento_cn.png"></div>
-  </div>
-
-  <!-- TECNOLOGIAS -->
-  <div id="tecnologias" class="tab-content">
-    <div class="card"><img src="img/html (2).png"></div>
-    <div class="card"><img src="img/css.png"></div>
-    <div class="card"><img src="img/js.png"></div>
-    <div class="card"><img src="img/bootstrap.png"></div>
-  </div>
+    <div id="certificados" class="tab-content">
+        <div class="card">
+            <img src="img-certificados/certificado_ifba.png" alt="" srcset="">
+            <div class="overlay">
+                <i class="bi bi-zoom-in"></i>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img-certificados/certificado_alura.png" alt="" srcset="">
+            <div class="overlay">
+                <i class="bi bi-zoom-in"></i>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img-certificados/certificado_obereri.jpg" alt="" srcset="">
+            <div class="overlay">
+                <i class="bi bi-zoom-in"></i>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img-certificados/certificado_drones.png" alt="" srcset="">
+            <div class="overlay">
+                <i class="bi bi-zoom-in"></i>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img-certificados/certificado_onhb.png" alt="" srcset="">
+            <div class="overlay">
+                <i class="bi bi-zoom-in"></i>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img-certificados/certificado_att.png" alt="" srcset="">
+            <div class="overlay">
+                <i class="bi bi-zoom-in"></i>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img-certificados/certificado_famif.png" alt="" srcset="">
+            <div class="overlay">
+                <i class="bi bi-zoom-in"></i>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img-certificados/certificado_ecodesfile.png" alt="" srcset="">
+            <div class="overlay">
+                <i class="bi bi-zoom-in"></i>
+            </div>
+        </div>
+        <div class="card">
+            <img src="img-certificados/certificado_evento_cn.png" alt="" srcset="">
+            <div class="overlay">
+                <i class="bi bi-zoom-in"></i>
+            </div>
+        </div>
+    </div>
+    <div id="tecnologias" class="tab-content">
+        <div class="card"><img src="img/html (2).png" alt="" srcset=""></div>
+        <div class="card"><img src="img/css.png" alt=""></div>
+        <div class="card"><img src="img/js.png" alt="" srcset=""></div>
+        <div class="card"><img src="img/bootstrap.png" alt="" srcset=""></div>
+    </div>
 </section>
+
+<div id="image-modal" class="image-modal">
+    <span class="image-modal-close">&times;</span>
+    <div class="image-modal-content">
+        <img id="modal-image" src="" alt="Imagem ampliada">
+    </div>
+</div>
 
 <section id="contato">
 <h2>Contato</h2>
@@ -148,13 +210,7 @@
 </div>
 </section>
 
- <!-- Modal para exibição de imagem -->
-    <div id="image-modal" class="image-modal">
-        <span class="image-modal-close">&times;</span>
-        <div class="image-modal-content">
-            <img id="modal-image" src="" alt="Imagem ampliada">
-        </div>
-    </div>
+ 
 
 
 <script src="script.js"></script>

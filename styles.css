@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Playwrite+IT+Moderna:wght@100..400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
-/* --- Estilos Globais --- */
+
 * {
     font-family: arial;
 }
@@ -25,6 +25,8 @@ canvas#bg {
     z-index: -1;
     background: #0d0d0d;
 }
+
+/* --- Canvas de Partículas --- */
 
 /* --- Vaga-lumes e Animações --- */
 .firefly {
@@ -208,6 +210,8 @@ canvas#bg {
 .firefly:nth-child(15)::before { animation-duration: 18s; }
 .firefly:nth-child(15)::after { animation-duration: 18s, 6800ms; animation-delay: 0ms, 4300ms; }
 
+/* --- Vaga-lumes e Animações --- */
+
 /* --- Cabeçalho e Navegação --- */
 header {
     background: rgba(13, 13, 13, 0.9);
@@ -255,6 +259,7 @@ nav a.active {
 }
 
 
+
 /* dark mode */
 
 
@@ -273,6 +278,10 @@ header nav a:hover {
 }
 
 /* dark mode */
+
+/* --- Cabeçalho e Navegação --- */
+
+
 
 /* --- Seções Gerais --- */
 section {
@@ -351,6 +360,7 @@ section.visible > * {
     box-shadow: 0 0 30px rgba(199, 125, 255, 0.5);
     animation: float 3s ease-in-out infinite;
 }
+/* --- Seção Home --- */
 
 /* --- Seção Sobre --- */
 #sobre {
@@ -390,6 +400,7 @@ section.visible > * {
     background-position: center;
     animation: float 4s ease-in-out infinite;
 }
+/* --- Seção Sobre --- */
 
 /* --- Seção Portfólio --- */
 #portfolio {
@@ -443,11 +454,11 @@ section.visible > * {
     display: flex;
 }
 
+/* --- Seção Portfólio --- */
 
 
 
-
-/* projetos porra */
+/* projetos  */
 
 /* Estilo geral para os cards de projetos */
 .projeto-card {
@@ -496,7 +507,6 @@ section.visible > * {
     object-fit: cover; /* Para garantir que a imagem preencha o espaço sem distorção */
 }
 
-/* E o restante do CSS continua igual... */
 
 /* Animação de transição (fade) */
 .fade {
@@ -581,9 +591,7 @@ section.visible > * {
 .btn-github:hover {
     background-color: #c77dff;
 }
-
-
-
+/* projetos  */
 
 /* --- Cards de Projetos --- */
 .card {
@@ -736,7 +744,9 @@ section.visible > * {
     box-shadow: 0 0 20px #c77dff, 0 0 35px #a64dff;
     transform: scale(1.05);
   }        
-        
+ /* --- Seção Portfólio --- */
+  
+
 
 /* --- Seção Contato --- */
 #contato {
@@ -809,6 +819,10 @@ section.visible > * {
     50% { transform: translateY(-15px); }
 }
 
+/* --- Seção Contato --- */
+
+/* --- Seções Gerais --- */
+
 /* --- Rodapé --- */
 .footer {
     position: relative;
@@ -830,55 +844,10 @@ section.visible > * {
     font-weight: 300;
 }
 
-/* Ondas */
-.wave {
-    position: absolute;
-    top: -100px;
-    left: 0;
-    width: 100%;
-    height: 100px;
-    background: url("https://i.ibb.co/wQZVxxk/wave.png");
-    background-size: 1000px 100px;
-}
+/* --- Rodapé --- */
 
-.wave#wave1 {
-    z-index: 1000;
-    opacity: 1;
-    bottom: 0;
-    animation: animateWaves 4s linear infinite;
-}
 
-.wave#wave2 {
-    z-index: 999;
-    opacity: 0.5;
-    bottom: 10px;
-    animation: animate 4s linear infinite !important;
-}
-
-.wave#wave3 {
-    z-index: 1000;
-    opacity: 0.2;
-    bottom: 15px;
-    animation: animateWaves 3s linear infinite;
-}
-
-.wave#wave4 {
-    z-index: 999;
-    opacity: 0.7;
-    bottom: 20px;
-    animation: animate 3s linear infinite;
-}
-
-@keyframes animateWaves {
-    0% { background-position-x: 1000px; }
-    100% { background-position-x: 0px; }
-}
-
-@keyframes animate {
-    0% { background-position-x: -1000px; }
-    100% { background-position-x: 0px; }
-}
-
+/* dark mode */
 
 :root {
   /* Tema Escuro (default) */
@@ -955,18 +924,6 @@ header nav a:hover {
   transition: color 0.3s;
 }
 #theme-toggle:hover { color: var(--purple-light); }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1056,9 +1013,12 @@ body.light-mode {
     }
 
 
+    /* dark mode */
+
+
+
     /* responsividade */
 
-/* --- Responsividade: Telas menores (max-width: 768px) --- */
 #menu-toggle {
     display: none;
 }
@@ -1279,6 +1239,5 @@ body.light-mode {
         justify-content: center;
     }
 }
-
 
     /* responsividade */

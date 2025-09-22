@@ -1,2 +1,2 @@
 # myportfolio
-Este repositório tem como objetivo armazenar um portfolio que apresenta minha trajetória na área de desenvolvimento, bem como todos os meus projetos desenvolvidos até então - sejam eles propostos pelo professor Fábio ou propostos pelo professor Webber
+Este repositório tem como objetivo armazenar um portfólio que apresenta minha trajetória na área de desenvolvimento, incluindo projetos propostos pelos professores do IF ou conquistas pessoais. Seja bem-vindo! Fique a vontade para acompanhar.

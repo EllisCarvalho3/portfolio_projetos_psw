@@ -1151,6 +1151,14 @@ body.light-mode {
     }
 }
 
+.logo-img img {
+    width: 70%;
+    padding-right: 30px;
+    height: auto;
+    margin-top: 10px;
+}
+
+
     /* Seção Início e Sobre */
     #home, #sobre {
         flex-direction: column;
@@ -1196,7 +1204,7 @@ body.light-mode {
 
     /* Ajuste proporcional dos cards de projetos */
     .projeto-card {
-        min-width: 400px;
+        min-width: 300px;
         min-height: 480px;
     }
 
@@ -1225,7 +1233,7 @@ body.light-mode {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
         justify-items: center;
-         margin-top: -400px; 
+         margin-top: -620px; 
     }
 
     #tecnologias .card {
@@ -1237,6 +1245,21 @@ body.light-mode {
     #contato .socials {
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    #contato h2 {
+        margin-top: 350px;
+    }
+
+     #contato p {
+        margin-top: 12px;
+    }
+
+     /* No mobile, 2 por linha */
+    @media (max-width: 480px) {
+        #contato .socials {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 }
 

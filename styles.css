@@ -1109,7 +1109,7 @@ body.light-mode {
         font-size: 2rem;
         color: var(--text-color);
         z-index: 1100; /* acima do nav */
-            margin-right: 80px; /* aproxima do centro */
+            margin-right: 100px; /* aproxima do centro */
 
     }
 
@@ -1255,12 +1255,8 @@ body.light-mode {
         margin-top: 12px;
     }
 
-     /* No mobile, 2 por linha */
-    @media (max-width: 480px) {
-        #contato .socials {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
+    
+    
 }
 
     /* responsividade */

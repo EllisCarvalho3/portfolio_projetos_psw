@@ -1259,25 +1259,20 @@ body.light-mode {
 
 @media (max-width: 768px) {
   .projeto-card {
-    min-width: 95vw;
+    min-width: 98vw;
     min-height: unset;
     padding: 10px;
   }
 
-  .slideshow-container {
+  .projeto-card .slideshow-container {
     width: 100%;
-    aspect-ratio: 16 / 9;     /* Mantém proporção de vídeo! */
-    height: auto;             /* O navegador calcula a altura automaticamente */
-    max-width: 100vw;
+    height: 38vw;
+    min-height: 140px;
+    max-height: 240px;
     margin: 0 auto;
     border-radius: 8px;
     overflow: hidden;
-    background: #000;         /* Cor de fundo para imagens PNG/JPG menores */
-  }
-
-   .mySlides1, .mySlides2, .mySlides {
-    width: 100%;
-    height: 100%;
+    background: #000;
   }
 
   .mySlides1 img, .mySlides2 img, .mySlides img {
@@ -1286,9 +1281,16 @@ body.light-mode {
     object-fit: cover;
     object-position: center;
     display: block;
-    border-radius: 6px;
+    margin: 0;
     background: #000;
+    border-radius: 6px;
   }
+
+   .mySlides1, .mySlides2, .mySlides {
+    width: 100%;
+    height: 100%;
+  }
+ 
 
     /* Ajuste botões slideshow se necessário */
     .slideshow-container .prev, 

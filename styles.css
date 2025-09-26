@@ -1017,7 +1017,8 @@ body.light-mode {
 
   #home p,
     #sobre p,
-    .projeto-info p {
+    .projeto-info p,
+            .footer p {
         color: var(--text-color);
     }
 
@@ -1326,6 +1327,7 @@ body.light-mode {
       font-size: 18px;
       top: 48%;
       padding: 2px 8px;
+      position: fixed;
   }
 
   .btn-github {

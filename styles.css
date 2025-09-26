@@ -485,26 +485,29 @@ section.visible > * {
 
 /* Container do slideshow */
 .slideshow-container {
-    max-width: 100%; /* Isso garante que o slideshow não ultrapasse a largura do card */
+    max-width: 100%;
+    height: 700px;         /* Ajuste a altura como preferir */
     position: relative;
     margin: auto;
     overflow: hidden;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     height: 700px; /* Altura do slideshow, conforme solicitado */
 }
 
 /* Estilo das imagens no slideshow */
-.mySlides {
-    display: none;
-    height: 100%;
+.mySlides1, .mySlides2, .mySlides {
     width: 100%;
+    height: 100%;
+    display: none;         /* Mostre apenas o slide ativo com JS */
 }
 
-.mySlides img {
-    height: 100%;
+.mySlides1 img, .mySlides2 img, .mySlides img {
     width: 100%;
-    object-fit: cover; /* Para garantir que a imagem preencha o espaço sem distorção */
+    height: 100%;
+    object-fit: cover;     /* Mantém proporção e cobre todo o espaço */
+    object-position: center center;
+    display: block;
 }
 
 
@@ -1197,16 +1200,7 @@ body.light-mode {
         flex-direction: column;
         align-items: center;
     }
-
-   .projeto-card .slideshow-container {
-        height: 350px;
-    }
-
-    /* Ajuste proporcional dos cards de projetos */
-    .projeto-card {
-        min-width: 300px;
-        min-height: 480px;
-    }
+   
 
      #certificados {
         display: grid;
@@ -1254,9 +1248,52 @@ body.light-mode {
      #contato p {
         margin-top: 12px;
     }
+    
+}
 
-    
-    
+@media (max-width: 768px) {
+    .projeto-card {
+        min-width: 90vw;        /* Card ocupa quase toda a largura */
+        min-height: 350px;      /* Reduz a altura mínima do card */
+        margin: 10px auto;
+    }
+
+    .projeto-card .slideshow-container {
+        width: 100%;
+        height: 210px;           /* Altura adaptada para tablets/celulares */
+        max-width: 100vw;
+        margin: 0 auto;
+    }
+
+    .mySlides1, .mySlides2, .mySlides {
+        width: 100%;
+        height: 100%;
+    }
+
+    .mySlides1 img, .mySlides2 img, .mySlides img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center center;
+        display: block;
+        border-radius: 6px;
+    }
+
+    /* Ajuste botões slideshow se necessário */
+    .slideshow-container .prev, 
+    .slideshow-container .next {
+        font-size: 22px;
+        top: 48%;
+        padding: 8px 14px;
+    }
+
+    /* Ajuste do texto dentro do card, se necessário */
+    .projeto-info h4 {
+        font-size: 1.1rem;
+    }
+    .projeto-info p {
+        font-size: 0.95rem;
+    }
 }
 
     /* responsividade */

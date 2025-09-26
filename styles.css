@@ -467,7 +467,7 @@ section.visible > * {
     align-items: center;
     text-align: center; 
     padding: 20px;
-     background: rgba(202, 143, 236, 0.101);
+     background: #ca8fec1a;
     box-shadow: 0 0 12px rgba(61, 29, 85, 0.2);
     border-radius: 8px;
     margin-bottom: 20px;
@@ -1279,7 +1279,7 @@ body.light-mode {
     margin: 0 auto 10px auto;
     border-radius: 8px;
     overflow: hidden;
-    background: #000;
+    background: #ca8fec1a;
     box-sizing: border-box;
   }
 
@@ -1296,7 +1296,7 @@ body.light-mode {
     height: 100%;
     object-fit: contain;
     border-radius: 6px;
-    background: #000;
+    background: #ca8fec1a;
     display: block;
     margin: 0;
   }

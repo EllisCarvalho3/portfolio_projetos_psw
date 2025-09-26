@@ -1104,6 +1104,8 @@ body.light-mode {
     header {
         padding: 1rem 1.5rem;
         justify-content: space-between;
+        position: fixed;
+        
     }
 
     .text h1 {

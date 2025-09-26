@@ -467,11 +467,13 @@ section.visible > * {
     align-items: center;
     text-align: center; 
     padding: 20px;
-    background: rgba(202, 143, 236, 0.101);
+     background: rgba(202, 143, 236, 0.101);
     box-shadow: 0 0 12px rgba(61, 29, 85, 0.2);
     border-radius: 8px;
     margin-bottom: 20px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: 
+        transform 0.25s cubic-bezier(.4,0,.2,1), 
+        box-shadow 0.25s cubic-bezier(.4,0,.2,1);
     cursor: pointer;
 
     min-width: 500px; /* Largura do card */
@@ -479,8 +481,8 @@ section.visible > * {
 }
 
 .projeto-card:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 0 25px #c77dff, 0 0 40px #a64dff;
+      transform: translateY(-8px) scale(1.015);
+    box-shadow: 0 8px 24px 0 #8833c536, 0 2px 4px 0 #824edc21;
 }
 
 /* Container do slideshow */
@@ -489,6 +491,7 @@ section.visible > * {
     height: 700px;         /* Ajuste a altura como preferir */
     position: relative;
     margin: auto;
+     margin-bottom: 0;    
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -500,6 +503,8 @@ section.visible > * {
     width: 100%;
     height: 100%;
     display: none;         /* Mostre apenas o slide ativo com JS */
+     margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 .mySlides1 img, .mySlides2 img, .mySlides img {
@@ -559,14 +564,13 @@ section.visible > * {
 
 /* Informações do projeto e botão */
 .projeto-info {
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 0 15px;
     width: 100%;
 }
 
 
 .projeto-info h4 {
-      margin-bottom: 10px;
       color: #a348d4;
       font-size: 1.4rem;
       text-shadow: 0 0 4px rgba(199, 125, 255, 0.5);
@@ -581,6 +585,7 @@ section.visible > * {
     }
 
 .btn-github {
+    margin-top: 7px;
     display: inline-block;
     padding: 10px 20px;
     background-color: #a64dff;
@@ -592,7 +597,8 @@ section.visible > * {
 }
 
 .btn-github:hover {
-    background-color: #c77dff;
+    background-color: #6a0dad;
+   
 }
 /* projetos  */
 

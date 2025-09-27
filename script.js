@@ -105,39 +105,23 @@ homeObserver.observe(document.getElementById('home'));
 
 //modal de certificados
 
-
-document.addEventListener('DOMContentLoaded', () => {
-  const certificadosSection = document.getElementById('certificados');
-  const imageModal = document.getElementById('image-modal');
-  const modalImage = document.getElementById('modal-image');
-  const closeButton = document.querySelector('.image-modal-close');
-
-  if (certificadosSection && imageModal && modalImage && closeButton) {
-    // Adiciona um listener de clique na seção de certificados
-    certificadosSection.addEventListener('click', (event) => {
-      const card = event.target.closest('.card');
-      if (card) {
-        const img = card.querySelector('img');
-        if (img && img.src) {
-          // Define a fonte da imagem do modal e a exibe
-          modalImage.src = img.src;
-          imageModal.style.display = 'flex';
-        }
-      }
+// Modal de zoom para certificados (requere o HTML do modal presente na página)
+document.querySelectorAll('#certificados .card .overlay').forEach(overlay => {
+    overlay.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const img = this.parentNode.querySelector('img');
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-image');
+        modalImg.src = img.src;
+        modal.style.display = 'flex';
     });
-
-    // Fecha o modal ao clicar no botão de fechar ou fora da imagem
-    closeButton.addEventListener('click', () => {
-      imageModal.style.display = 'none';
-    });
-
-    imageModal.addEventListener('click', (event) => {
-      if (event.target === imageModal) {
-        imageModal.style.display = 'none';
-      }
-    });
-  }
 });
+document.querySelector('.image-modal-close').onclick = function() {
+    document.getElementById('image-modal').style.display = 'none';
+};
+document.getElementById('image-modal').onclick = function(e) {
+    if (e.target === this) this.style.display = 'none';
+};
 
 
 //modal de certificados

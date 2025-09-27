@@ -143,175 +143,90 @@ document.addEventListener('DOMContentLoaded', () => {
 //modal de certificados
 
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
-
-  // Variaveis e funções do Slideshow (mantidas)
-  let slideIndex1 = 0;
-  let slideIndex2 = 0;
-  let slideshowInterval1;
-  let slideshowInterval2;
-
-  function showSlides1() {
-    const slides = document.getElementsByClassName("mySlides1");
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    slideIndex1++;
-    if (slideIndex1 > slides.length) {
-      slideIndex1 = 1;
-    }
-    slides[slideIndex1 - 1].style.display = "block";
+  // NAVBAR MOBILE (hamburguer)
+  const menuToggle = document.getElementById('menu-toggle');
+  const nav = document.querySelector('header nav');
+  if (menuToggle && nav) {
+    menuToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+    nav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        nav.classList.remove('active');
+      });
+    });
   }
 
-  function showSlides2() {
-    const slides = document.getElementsByClassName("mySlides2");
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    slideIndex2++;
-    if (slideIndex2 > slides.length) {
-      slideIndex2 = 1;
-    }
-    slides[slideIndex2 - 1].style.display = "block";
-  }
-
-  // Funções de navegação manual do slideshow (mantidas)
-  window.plusSlides1 = function(n) {
-    clearInterval(slideshowInterval1);
-    slideIndex1 += n;
-    const slides = document.getElementsByClassName("mySlides1");
-    if (slideIndex1 > slides.length) {
-      slideIndex1 = 1;
-    }
-    if (slideIndex1 < 1) {
-      slideIndex1 = slides.length;
-    }
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    slides[slideIndex1 - 1].style.display = "block";
-    slideshowInterval1 = setInterval(showSlides1, 5000);
-  }
-
-  window.plusSlides2 = function(n) {
-    clearInterval(slideshowInterval2);
-    slideIndex2 += n;
-    const slides = document.getElementsByClassName("mySlides2");
-    if (slideIndex2 > slides.length) {
-      slideIndex2 = 1;
-    }
-    if (slideIndex2 < 1) {
-      slideIndex2 = slides.length;
-    }
-    for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    slides[slideIndex2 - 1].style.display = "block";
-    slideshowInterval2 = setInterval(showSlides2, 5000);
-  }
-
-  // Lógica das abas e da animação dos cards
+  // --- TABS PORTFÓLIO ---
   const tabs = document.querySelectorAll('.tabs button');
   const contents = document.querySelectorAll('.tab-content');
-
-  // Função que inicia o conteúdo das abas e as animações
   function activateTab(tabId) {
-    // Remove a classe 'active' de todos os botoes e conteúdos
     tabs.forEach(t => t.classList.remove('active'));
     contents.forEach(c => c.classList.remove('active'));
-
-    // Limpa a visibilidade de todos os cards antes de iniciar a animação
-    document.querySelectorAll('.tab-content .card').forEach(card => {
-      card.classList.remove('visible');
-    });
-
-    // Ativa o botão e o conteúdo correspondente
-    const activeTabButton = document.querySelector(`[data-tab="${tabId}"]`);
-    const activeContent = document.getElementById(tabId);
-
-    if (activeTabButton && activeContent) {
-      activeTabButton.classList.add('active');
-      activeContent.classList.add('active');
-
-      // Lógica para controle dos Slideshows
-      clearInterval(slideshowInterval1);
-      clearInterval(slideshowInterval2);
-      if (tabId === 'projetos') {
-        showSlides1();
-        showSlides2();
-        slideshowInterval1 = setInterval(showSlides1, 5000);
-        slideshowInterval2 = setInterval(showSlides2, 5000);
-      }
-
-      // Animação de entrada dos cards
-      const cards = activeContent.querySelectorAll('.card');
-      cards.forEach((card, i) => {
-        // Usa setTimeout para aplicar a animação com atraso
-        setTimeout(() => card.classList.add('visible'), i * 150);
-      });
+    document.querySelectorAll('.tab-content .card').forEach(card => card.classList.remove('visible'));
+    const btn = document.querySelector(`[data-tab="${tabId}"]`);
+    const content = document.getElementById(tabId);
+    if (btn && content) {
+      btn.classList.add('active');
+      content.classList.add('active');
+      const cards = content.querySelectorAll('.card');
+      cards.forEach((card, i) => setTimeout(() => card.classList.add('visible'), i * 120));
     }
   }
-
-  // Adiciona evento de clique a todos os botões de aba
   tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      activateTab(tab.dataset.tab);
-    });
+    tab.addEventListener('click', () => activateTab(tab.dataset.tab));
   });
-
-  // Ativa a primeira aba ao carregar a página
   activateTab('projetos');
 
+  // --- SLIDESHOW ---
+  document.querySelectorAll('.slideshow-container').forEach(container => {
+    const slides = container.querySelectorAll('.slide');
+    let current = 0, interval;
+    function showSlide(n) {
+      slides.forEach(slide => slide.style.display = 'none');
+      slides[n].style.display = 'flex';
+    }
+    function nextSlide(dir = 1) {
+      current = (current + dir + slides.length) % slides.length;
+      showSlide(current);
+    }
+    const prev = container.querySelector('.prev');
+    const next = container.querySelector('.next');
+    if (prev && next) {
+      prev.addEventListener('click', () => { nextSlide(-1); resetInterval(); });
+      next.addEventListener('click', () => { nextSlide(1); resetInterval(); });
+    }
+    function startInterval() {
+      interval = setInterval(() => nextSlide(1), 5000);
+    }
+    function resetInterval() {
+      clearInterval(interval);
+      startInterval();
+    }
+    showSlide(current);
+    startInterval();
+    container.addEventListener('mouseenter', () => clearInterval(interval));
+    container.addEventListener('mouseleave', startInterval);
+  });
 
-  // Lógica para o efeito de scroll ativo (mantida)
-  const navLinks = document.querySelectorAll('nav a');
-  const sections = document.querySelectorAll('section');
+  // --- NAVBAR ACTIVE ON SCROLL ---
+  const navLinks = document.querySelectorAll('nav a[href^="#"]');
+  const sections = Array.from(document.querySelectorAll('section')).filter(sec => sec.id);
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
         const currentId = entry.target.id;
         navLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href').substring(1) === currentId) {
-            link.classList.add('active');
-          }
+          link.classList.toggle('active', link.getAttribute('href').substring(1) === currentId);
         });
       } else {
         entry.target.classList.remove('visible');
       }
     });
-  }, {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.7
-  });
-
-  sections.forEach(section => {
-    observer.observe(section);
-  });
-});
-
-
-// responsividade
-
-// Seleciona o botão e o menu de navegação
-const menuToggle = document.getElementById('menu-toggle');
-const nav = document.querySelector('nav');
-
-// Adiciona um evento de clique no botão
-menuToggle.addEventListener('click', () => {
-  // Alterna a classe 'active' na navegação
-  nav.classList.toggle('active');
-});
-
-// Opcional: Esconde o menu quando um link é clicado
-document.querySelectorAll('nav a').forEach(link => {
-  link.addEventListener('click', () => {
-    nav.classList.remove('active');
-  });
+  }, { root: null, rootMargin: '0px', threshold: 0.6 });
+  sections.forEach(section => observer.observe(section));
 });
 
 // responsividade

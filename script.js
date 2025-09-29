@@ -75,142 +75,79 @@ window.addEventListener('resize', () => {
 
 // dark mode
 
-// Efeito de digitação corrigido na seção Home
-function startTypingEffect() {
-  const h1 = document.getElementById('home').querySelector('h1');
-  const h2 = document.getElementById('home').querySelector('h2');
 
-  h1.style.animation = 'typing 2s steps(15) forwards, blink 0.75s step-end infinite';
+// MENU HAMBURGUER
+const menuToggle = document.getElementById('menu-toggle');
+const nav = document.getElementById('main-nav');
+menuToggle.addEventListener('click',()=>{
+nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+});
 
-  // Atraso para a animação do h2 começar após a do h1
-  h2.style.animation = 'none'; // Reseta a animação antes de iniciar
-  setTimeout(() => {
-    h2.style.animation = 'typing2 2s steps(10) forwards, blink 0.75s step-end infinite';
-  }, 2000); // 2 segundos de atraso (duração da animação do h1)
+
+// TABS
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabPanels = document.querySelectorAll('.tab-panel');
+tabBtns.forEach(btn=>{
+btn.addEventListener('click',()=>{
+tabBtns.forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+tabPanels.forEach(p=>p.style.display='none');
+document.getElementById(btn.dataset.tab).style.display='block';
+});
+});
+
+
+// SLIDESHOWS
+function initCarousel(carousel){
+const slides = carousel.querySelectorAll('.slides img');
+let index = 0;
+function showSlide(i){
+slides.forEach((s,idx)=> s.style.display = idx===i? 'block':'none');
 }
-
-// Observa a seção Home e inicia a animação apenas quando ela está visível
-const homeObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      startTypingEffect();
-      // Para de observar após a primeira vez para não reiniciar
-      homeObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.5 }); // Inicia quando metade da seção Home está visível
-
-homeObserver.observe(document.getElementById('home'));
+showSlide(index);
+const prev = carousel.querySelector('.prev');
+const next = carousel.querySelector('.next');
+prev.addEventListener('click',()=>{index=(index-1+slides.length)%slides.length;showSlide(index)});
+next.addEventListener('click',()=>{index=(index+1)%slides.length;showSlide(index)});
+setInterval(()=>{index=(index+1)%slides.length;showSlide(index)},5000);
+}
+document.querySelectorAll('[data-carousel]').forEach(initCarousel);
 
 
-//modal de certificados
-
-// Modal de zoom para certificados (requere o HTML do modal presente na página)
-document.querySelectorAll('#certificados .card .overlay').forEach(overlay => {
-    overlay.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const img = this.parentNode.querySelector('img');
-        const modal = document.getElementById('image-modal');
-        const modalImg = document.getElementById('modal-image');
-        modalImg.src = img.src;
-        modal.style.display = 'flex';
-    });
+// MODAL CERTIFICADOS
+const modal = document.getElementById('modal');
+const zoomBtns = document.querySelectorAll('.zoom-btn');
+zoomBtns.forEach(btn=>{
+btn.addEventListener('click',()=>{
+modal.innerHTML = `<div class="modal-img"><button class="close">&times;</button><img src="${btn.dataset.src}" alt="certificado"></div>`;
+modal.style.display='block';
+modal.querySelector('.close').onclick=()=>{modal.style.display='none'};
+modal.onclick=(e)=>{if(e.target===modal) modal.style.display='none'};
 });
-document.querySelector('.image-modal-close').onclick = function() {
-    document.getElementById('image-modal').style.display = 'none';
-};
-document.getElementById('image-modal').onclick = function(e) {
-    if (e.target === this) this.style.display = 'none';
-};
-
-
-//modal de certificados
-
-
-document.addEventListener('DOMContentLoaded', () => {
-  // NAVBAR MOBILE (hamburguer)
-  const menuToggle = document.getElementById('menu-toggle');
-  const nav = document.querySelector('header nav');
-  if (menuToggle && nav) {
-    menuToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
-    });
-    nav.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        nav.classList.remove('active');
-      });
-    });
-  }
-
-  // --- TABS PORTFÓLIO ---
-  const tabs = document.querySelectorAll('.tabs button');
-  const contents = document.querySelectorAll('.tab-content');
-  function activateTab(tabId) {
-    tabs.forEach(t => t.classList.remove('active'));
-    contents.forEach(c => c.classList.remove('active'));
-    document.querySelectorAll('.tab-content .card').forEach(card => card.classList.remove('visible'));
-    const btn = document.querySelector(`[data-tab="${tabId}"]`);
-    const content = document.getElementById(tabId);
-    if (btn && content) {
-      btn.classList.add('active');
-      content.classList.add('active');
-      const cards = content.querySelectorAll('.card');
-      cards.forEach((card, i) => setTimeout(() => card.classList.add('visible'), i * 120));
-    }
-  }
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => activateTab(tab.dataset.tab));
-  });
-  activateTab('projetos');
-
-  // --- SLIDESHOW ---
-  document.querySelectorAll('.slideshow-container').forEach(container => {
-    const slides = container.querySelectorAll('.slide');
-    let current = 0, interval;
-    function showSlide(n) {
-      slides.forEach(slide => slide.style.display = 'none');
-      slides[n].style.display = 'flex';
-    }
-    function nextSlide(dir = 1) {
-      current = (current + dir + slides.length) % slides.length;
-      showSlide(current);
-    }
-    const prev = container.querySelector('.prev');
-    const next = container.querySelector('.next');
-    if (prev && next) {
-      prev.addEventListener('click', () => { nextSlide(-1); resetInterval(); });
-      next.addEventListener('click', () => { nextSlide(1); resetInterval(); });
-    }
-    function startInterval() {
-      interval = setInterval(() => nextSlide(1), 5000);
-    }
-    function resetInterval() {
-      clearInterval(interval);
-      startInterval();
-    }
-    showSlide(current);
-    startInterval();
-    container.addEventListener('mouseenter', () => clearInterval(interval));
-    container.addEventListener('mouseleave', startInterval);
-  });
-
-  // --- NAVBAR ACTIVE ON SCROLL ---
-  const navLinks = document.querySelectorAll('nav a[href^="#"]');
-  const sections = Array.from(document.querySelectorAll('section')).filter(sec => sec.id);
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        const currentId = entry.target.id;
-        navLinks.forEach(link => {
-          link.classList.toggle('active', link.getAttribute('href').substring(1) === currentId);
-        });
-      } else {
-        entry.target.classList.remove('visible');
-      }
-    });
-  }, { root: null, rootMargin: '0px', threshold: 0.6 });
-  sections.forEach(section => observer.observe(section));
 });
 
-// responsividade
+
+// EFEITO DIGITAÇÃO
+function typingEffect(el,text,speed=80,delay=1200){
+let i=0;
+function type(){
+if(i<text.length){
+el.innerHTML += text.charAt(i);
+i++;
+setTimeout(type,speed);
+} else {
+setTimeout(()=>{
+el.innerHTML='';
+i=0;
+type();
+},delay);
+}
+}
+el.innerHTML='';
+type();
+}
+const title = document.getElementById('hero-title');
+const desc = document.getElementById('hero-desc');
+typingEffect(title,'Front-End Developer',80,2000);
+typingEffect(desc,'Dev Front-End em evolução, que constroe experiências digitais criativas e funcionais para todos os dispositivos.',40,2500);
+

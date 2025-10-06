@@ -331,6 +331,8 @@ section.visible > * {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 0 15px rgba(199, 125, 255, 0.7);
+        min-height: 4.5rem; /* Ajuste este valor até que a linha de texto mais longa caiba confortavelmente */
+
 }
 
 /* Estiliza o SPAN que receberá o efeito de digitação */
@@ -340,6 +342,8 @@ section.visible > * {
     
     /* Mantemos apenas o cursor (border-right) e a animação blink */
     border-right: 2px solid #c77dff; 
+        white-space: nowrap; /* Mantenha para evitar que o cargo quebre */
+
     animation: blink 0.75s step-end infinite; /* O cursor piscando */
 }
 
@@ -351,19 +355,14 @@ section.visible > * {
 
 /* As @keyframes typing e deleting foram removidas, pois o JS fará o trabalho. */
 
-/* ... seu CSS anterior ... */
-
-/* Estiliza o SPAN (H1) */
-#dynamic-text {
-    display: inline-block; 
-    border-right: 2px solid #c77dff; 
-    animation: blink 0.75s step-end infinite; 
-}
 
 /* NOVO: Estiliza o Parágrafo (P) para ter o cursor */
 #dynamic-description {
     display: inline-block; /* Necessário para que o cursor funcione */
     border-right: 2px solid #c77dff; 
+        white-space: normal; 
+
+
     animation: blink 0.75s step-end infinite; 
     
     /* Demais estilos do parágrafo */
@@ -1423,6 +1422,7 @@ body.light-mode {
     /* Reduz o tamanho da fonte principal do título */
     #home h1 {
         font-size: 3rem; 
+        margin-left: 60px;
     }
 
     /* Reduz o tamanho da fonte do parágrafo */
@@ -1442,11 +1442,13 @@ body.light-mode {
     /* Reduz ainda mais o tamanho da fonte principal */
     #home h1 {
         font-size: 2.5rem; 
+
     }
 
     /* Mais um ajuste na fonte do parágrafo */
     #dynamic-description {
         font-size: 1rem;
+
     }
     
     /* Ajusta o espaçamento do contêiner de texto se necessário */

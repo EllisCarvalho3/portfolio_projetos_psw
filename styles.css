@@ -1290,6 +1290,7 @@ body.light-mode {
         max-width: 90vw; /* Limita ao viewport */
         width: 400px; /* Largura pré-definida */
         max-height: 400px;
+        margin-right: 10px;
     }
     .slide {
         height: 400px;
@@ -1321,8 +1322,8 @@ body.light-mode {
         gap: 20px;
     }
     .tech-icon {
-        width: 80px;
-        height: 80px;
+        width: 140px;
+        height: 140px;
     }
 }
 
@@ -1359,8 +1360,8 @@ body.light-mode {
   }
 
   .tech-icon {
-    width: 100px;
-    height: 100px;
+    width: 140px;
+    height: 140px;
   }
 }
 
@@ -1373,8 +1374,8 @@ body.light-mode {
     grid-template-columns: 1fr;
   }
   .tech-icon {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
   }
 }
 

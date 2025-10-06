@@ -457,7 +457,12 @@ body.light-mode {
     align-items: center;
 }
 #portfolio h2 {
-    margin-bottom: 30px;
+  font-size: 2.5rem;
+    background: linear-gradient(90deg, #c77dff, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(199, 125, 255, 0.7);
+    animation: neonPulse 2s infinite;
 }
 
 /* Estilo das Tabs */
@@ -501,17 +506,16 @@ body.light-mode {
 }
 
 .tab-content {
-    display: none;
-    padding: 20px 0;
-    min-height: 50vh; /* Para garantir o scroll */
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .tab-content.active {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
+  display: flex; /* ou block, conforme o layout */
+  opacity: 1;
 }
+
 
 /* Efeito Hover/Zoom/Shadow Geral (para cards de Projetos, Certificados e Tecnologias) */
 .card {
@@ -520,6 +524,7 @@ body.light-mode {
     overflow: hidden;
     position: relative;
     background-color: rgba(var(--text-color-rgb), 0.03); /* Fundo sutil para cards */
+    
 }
 .card:hover {
     transform: scale(1.03) translateY(-5px);
@@ -553,59 +558,63 @@ body.light-mode {
     height: 3.6em; /* Altura fixa para evitar "vazamento" de texto */
     overflow: hidden;
 }
-
-/* Container do Slideshow */
 .slideshow-container {
-    max-width: 400px; /* Largura pré-definida */
-    max-height: 400px; /* Altura pré-definida */
-    position: relative;
-    margin: auto;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  position: relative;
+  max-width: 420px;
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 20px auto;
+  box-shadow: 0 8px 30px rgba(199, 125, 255, 0.25);
+  background: rgba(var(--text-color-rgb), 0.04);
+  transition: transform 0.3s ease;
+}
+.slideshow-container:hover {
+  transform: translateY(-5px);
 }
 
 .slide {
-    display: none; /* Controlado pelo JS */
-    width: 100%;
-    height: 400px; /* Altura forçada do slide */
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
+  display: none;
+  width: 100%;
+  height: 100%;
+  place-items: center;
 }
 
 .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Faz a imagem preencher o slide sem distorcer (cortando se necessário) */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  filter: brightness(0.95);
+  transition: filter 0.3s ease;
+}
+.slide img:hover {
+  filter: brightness(1.05);
 }
 
-/* Setas de navegação */
+/* Setas sutis e modernas */
 .prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px;
-    margin-top: -22px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 10;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  padding: 10px 15px;
+  font-size: 22px;
+  color: var(--purple-light);
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--purple-light);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  z-index: 10;
 }
-
-.next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-}
-
 .prev:hover, .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+  background: var(--purple-light);
+  color: var(--background-color);
 }
+.prev { left: 10px; }
+.next { right: 10px; }
+
 
 /* Botão GitHub */
 .github-btn {
@@ -626,117 +635,134 @@ body.light-mode {
 
 /* --- Tab Certificados --- */
 .certificates-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+  padding: 10px;
+  width: 100%;
+  justify-items: center;
 }
 
 .certificate-card {
-    position: relative;
-    cursor: pointer;
-    aspect-ratio: 4/3; /* Proporção razoável para a maioria dos certificados */
+  position: relative;
+  overflow: hidden;
+  cursor: zoom-in;
+  border-radius: 14px;
+  box-shadow: 0 6px 25px rgba(127, 14, 213, 0.547);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
+.certificate-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 30px #7f0ed58b;
+}
 .certificate-card img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 14px;
+  filter: brightness(0.9);
+  transition: filter 0.3s ease;
+}
+.certificate-card:hover img {
+  filter: brightness(1.05);
 }
 
+/* Overlay com ícone de lupa */
 .certificate-card .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    border-radius: 8px;
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 14px;
 }
-
 .certificate-card:hover .overlay {
-    opacity: 1;
+  opacity: 1;
 }
-
 .overlay i {
-    font-size: 2rem;
-    color: white;
+  font-size: 2.2rem;
+  color: var(--purple-light);
+  text-shadow: 0 0 10px var(--purple-main);
 }
 
-/* Modal de Imagem (Zoom) */
+/* Modal refinado */
 .image-modal {
-    display: none; 
-    position: fixed; 
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgba(0,0,0,0.9);
-    justify-content: center;
-    align-items: center;
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 3000;
+  justify-content: center;
+  align-items: center;
 }
-
 .image-modal-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 900px;
-    max-height: 90vh;
-    object-fit: contain; /* Garante que a imagem caiba na tela */
+  width: 90%;
+  max-width: 900px;
+  max-height: 85vh;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(199, 125, 255, 0.5);
+  object-fit: contain;
+  animation: zoomIn 0.3s ease forwards;
 }
-
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
 .image-modal-close {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-    cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 36px;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.image-modal-close:hover {
+  color: var(--purple-light);
+  transform: scale(1.1);
 }
 
-.image-modal-close:hover,
-.image-modal-close:focus {
-    color: #bbb;
-    text-decoration: none;
-}
 
 
 /* --- Tab Tecnologias --- */
 .technologies-line {
-    display: flex;
-    justify-content: center;
-    gap: 30px; /* Espaçamento adequado */
-    flex-wrap: wrap; /* Garante quebra de linha se a tela for pequena */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 35px;
+  padding: 20px 0;
 }
 
 .tech-icon {
-    width: 100px;
-    height: 100px;
-    padding: 10px;
-    background-color: var(--background-color);
-    border-radius: 50%; /* Icones circulares */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 240px;
+  height: 240px;
+  background: linear-gradient(145deg, rgba(199,125,255,0.15), rgba(100,0,180,0.25));
+  border: 2px solid var(--purple-light);
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(199, 125, 255, 0.3);
+  display: flex;
+  align-items: center;
+  margin-left: 25px;
+  justify-content: center;
+  transition: all 0.35s ease;
+    cursor: pointer;
+}
+.tech-icon:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 0 25px rgba(199, 125, 255, 0.5);
+  background: linear-gradient(145deg, rgba(199,125,255,0.25), rgba(100,0,180,0.45));
+}
+.tech-icon img {
+  width: 65%;
+  height: 80%;
+  object-fit: contain;
+ 
 }
 
-.tech-icon img {
-    width: 70%;
-    height: 70%;
-    object-fit: contain;
-}
 
 
 
@@ -1285,4 +1311,38 @@ body.light-mode {
     .certificates-grid {
         grid-template-columns: 1fr; /* Uma coluna só */
     }
+}
+
+@media (max-width: 768px) {
+  .slideshow-container {
+    max-width: 90vw;
+    aspect-ratio: 1/1;
+  }
+  .prev, .next {
+    font-size: 18px;
+    padding: 8px;
+  }
+
+  .certificates-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tech-icon {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 420px) {
+  .slideshow-container {
+    max-width: 100%;
+    aspect-ratio: auto;
+  }
+  .certificates-grid {
+    grid-template-columns: 1fr;
+  }
+  .tech-icon {
+    width: 70px;
+    height: 70px;
+  }
 }

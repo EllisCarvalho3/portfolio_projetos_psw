@@ -538,18 +538,21 @@ body.light-mode {
 }
 
 .project-card {
-    width: 48%; /* Quase metade para caber dois lado a lado */
+    width: 40%; /* Quase metade para caber dois lado a lado */
     min-width: 350px;
     display: flex;
+    margin-left: 70px;
     flex-direction: column;
     align-items: center;
     padding: 20px;
     text-align: center;
+    background-color: #36095d24;
 }
 
 .project-card h3 {
     color: var(--purple-light);
     margin-bottom: 15px;
+    font-size: 1.8rem;
 }
 .project-card p {
     margin: 15px 0 25px;
@@ -620,8 +623,8 @@ body.light-mode {
 .github-btn {
     display: inline-block;
     padding: 10px 20px;
-    background-color: var(--purple-main);
-    color: var(--background-color);
+    background-color: #a64dff;
+    color: black;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
@@ -629,14 +632,17 @@ body.light-mode {
 }
 
 .github-btn:hover {
-    background-color: var(--purple-light);
+    background-color: #6a0dad;
+   color: white;
     transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(199, 125, 255, 0.25);
+
 }
 
 /* --- Tab Certificados --- */
 .certificates-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas fixas */
   gap: 25px;
   padding: 10px;
   width: 100%;
@@ -650,6 +656,8 @@ body.light-mode {
   border-radius: 14px;
   box-shadow: 0 6px 25px rgba(127, 14, 213, 0.547);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 320px; /* limite visual por card */
+
 }
 .certificate-card:hover {
   transform: scale(1.03);

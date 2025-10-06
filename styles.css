@@ -323,33 +323,57 @@ section.visible > * {
     max-width: 500px;
 }
 
-#home h1,
-#home h2 {
+#home h1 {
+    font-size: 3.5rem;
+    margin: 0;
+    /* Aplica o gradiente apenas ao h1 */
     background: linear-gradient(90deg, #a64dff, #c77dff, #e6e6fa);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 0 15px rgba(199, 125, 255, 0.7);
-    margin: 0;
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 2px solid #c77dff;
 }
 
-#home h1 {
-    font-size: 3.5rem;
-    animation: typing 2s steps(15), blink 0.75s step-end infinite;
+/* Estiliza o SPAN que receberá o efeito de digitação */
+#dynamic-text {
+    /* Não precisa mais de visibility: hidden, overflow e white-space */
+    display: inline-block; 
+    
+    /* Mantemos apenas o cursor (border-right) e a animação blink */
+    border-right: 2px solid #c77dff; 
+    animation: blink 0.75s step-end infinite; /* O cursor piscando */
 }
 
-#home h2 {
-    font-size: 2.5rem;
-    animation: typing2 2s steps(10), blink 0.75s step-end infinite;
-    margin-bottom: 20px;
+/* Animações de Digitação e Cursor */
+/* Mantemos apenas o @keyframes para o cursor piscando */
+@keyframes blink {
+    50% { border-color: transparent }
 }
 
-#home p {
+/* As @keyframes typing e deleting foram removidas, pois o JS fará o trabalho. */
+
+/* ... seu CSS anterior ... */
+
+/* Estiliza o SPAN (H1) */
+#dynamic-text {
+    display: inline-block; 
+    border-right: 2px solid #c77dff; 
+    animation: blink 0.75s step-end infinite; 
+}
+
+/* NOVO: Estiliza o Parágrafo (P) para ter o cursor */
+#dynamic-description {
+    display: inline-block; /* Necessário para que o cursor funcione */
+    border-right: 2px solid #c77dff; 
+    animation: blink 0.75s step-end infinite; 
+    
+    /* Demais estilos do parágrafo */
     font-size: 1.2rem;
     color: #e6e6fa;
-    align-items: justify;
+}
+
+/* ... o @keyframes blink ... */
+@keyframes blink {
+    50% { border-color: transparent }
 }
 
 #home img {

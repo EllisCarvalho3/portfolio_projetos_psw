@@ -76,31 +76,128 @@ window.addEventListener('resize', () => {
 // dark mode
 
 // Efeito de digitação corrigido na seção Home
-function startTypingEffect() {
-  const h1 = document.getElementById('home').querySelector('h1');
-  const h2 = document.getElementById('home').querySelector('h2');
+// --- DADOS PARA O EFEITO ---
+const roles = ["Developer", "Designer", "Creator"]; 
+const descriptions = [
+    "Construo experiências digitais criativas e funcionais para todos os dispositivos.", 
+    "Crio interfaces intuitivas e designs centrados no usuário que encantam.",
+    "Dou vida a ideias, transformando conceitos em produtos digitais funcionais."
+]; 
+let textIndex = 0; 
 
-  h1.style.animation = 'typing 2s steps(15) forwards, blink 0.75s step-end infinite';
+const dynamicTextElement = document.getElementById('dynamic-text');
+const dynamicDescriptionElement = document.getElementById('dynamic-description'); 
 
-  // Atraso para a animação do h2 começar após a do h1
-  h2.style.animation = 'none'; // Reseta a animação antes de iniciar
-  setTimeout(() => {
-    h2.style.animation = 'typing2 2s steps(10) forwards, blink 0.75s step-end infinite';
-  }, 2000); // 2 segundos de atraso (duração da animação do h1)
+// AJUSTES DE VELOCIDADE
+const roleSpeed = 120; // Velocidade de digitação do CARGO (um pouco mais lenta que antes)
+const descriptionSpeed = 40; // Velocidade de digitação da DESCRIÇÃO (deve ser mais lenta para textos longos)
+const pauseTime = 2500; // Tempo de pausa após TUDO ser digitado (aumentado para leitura)
+const deleteSpeed = 40; // Velocidade de apagar (agora a mesma para ambos)
+
+// 1. Digitar o Cargo (H1)
+function typeRole() {
+    const currentRole = roles[textIndex];
+    let i = 0;
+
+    function addCharacter() {
+        if (i < currentRole.length) {
+            dynamicTextElement.textContent += currentRole.charAt(i);
+            i++;
+            setTimeout(addCharacter, roleSpeed);
+        } else {
+            // Terminou de digitar o cargo. Começa a digitar a descrição.
+            typeDescription();
+        }
+    }
+    
+    addCharacter();
 }
 
-// Observa a seção Home e inicia a animação apenas quando ela está visível
-const homeObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      startTypingEffect();
-      // Para de observar após a primeira vez para não reiniciar
-      homeObserver.unobserve(entry.target);
+// NOVO: 2. Digitar a Descrição (Parágrafo)
+function typeDescription() {
+    const currentDescription = descriptions[textIndex];
+    let j = 0;
+
+    function addDescriptionCharacter() {
+        if (j < currentDescription.length) {
+            // Adiciona a próxima letra ao parágrafo
+            dynamicDescriptionElement.textContent += currentDescription.charAt(j);
+            j++;
+            setTimeout(addDescriptionCharacter, descriptionSpeed);
+        } else {
+            // Terminou de digitar a descrição. Próxima ação: pausar e depois apagar.
+            setTimeout(erase, pauseTime);
+        }
     }
-  });
-}, { threshold: 0.5 }); // Inicia quando metade da seção Home está visível
+    
+    addDescriptionCharacter();
+}
+
+// 3. Apagar o texto (Agora apaga o Parágrafo e depois o H1)
+function erase() {
+    
+    // Primeiro, apaga o parágrafo
+    function eraseDescription() {
+        let currentDesc = dynamicDescriptionElement.textContent;
+        let j = currentDesc.length;
+
+        function removeDescCharacter() {
+            if (j > 0) {
+                dynamicDescriptionElement.textContent = currentDesc.substring(0, j - 1);
+                j--;
+                setTimeout(removeDescCharacter, deleteSpeed);
+            } else {
+                // Parágrafo apagado. Começa a apagar o Cargo.
+                eraseRole();
+            }
+        }
+        removeDescCharacter();
+    }
+    
+    // Segundo, apaga o cargo
+    function eraseRole() {
+        let currentRole = dynamicTextElement.textContent;
+        let i = currentRole.length;
+
+        function removeRoleCharacter() {
+            if (i > 0) {
+                dynamicTextElement.textContent = currentRole.substring(0, i - 1);
+                i--;
+                setTimeout(removeRoleCharacter, deleteSpeed);
+            } else {
+                // Tudo apagado. Cicla para o próximo texto e recomeça.
+                textIndex = (textIndex + 1) % roles.length; 
+                typeRole();
+            }
+        }
+        removeRoleCharacter();
+    }
+    
+    // Inicia o processo de apagar a descrição
+    eraseDescription();
+}
+
+
+// Início do ciclo (controlado pelo IntersectionObserver)
+function startTypingLoop() {
+    dynamicTextElement.textContent = ''; 
+    dynamicDescriptionElement.textContent = ''; 
+    typeRole();
+}
+
+
+// Observador para iniciar a animação apenas quando a seção Home estiver visível
+const homeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            startTypingLoop();
+            homeObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 }); 
 
 homeObserver.observe(document.getElementById('home'));
+
 
 
 //modal de certificados

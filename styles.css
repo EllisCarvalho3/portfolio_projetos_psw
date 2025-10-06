@@ -1336,8 +1336,8 @@ body.light-mode {
   }
 
   .tech-icon {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
   }
 }
 
@@ -1350,7 +1350,7 @@ body.light-mode {
     grid-template-columns: 1fr;
   }
   .tech-icon {
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
   }
 }

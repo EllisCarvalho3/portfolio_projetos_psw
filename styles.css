@@ -1413,3 +1413,52 @@ body.light-mode {
     font-size: 28px;
   }
 }
+
+/* ------------------------------------------- */
+/* RESPONSIVIDADE GERAL (Ajustes de Fontes)    */
+/* ------------------------------------------- */
+
+/* Ajuste para tablets e telas menores (até 768px de largura) */
+@media (max-width: 768px) {
+    /* Reduz o tamanho da fonte principal do título */
+    #home h1 {
+        font-size: 3rem; 
+    }
+
+    /* Reduz o tamanho da fonte do parágrafo */
+    #dynamic-description {
+        font-size: 1.1rem;
+    }
+    
+    /* Se você tiver a imagem, pode ajustá-la aqui. Exemplo: */
+    #home img {
+        max-width: 300px;
+        height: auto;
+    }
+}
+
+/* Ajuste para smartphones maiores (até 480px de largura) */
+@media (max-width: 480px) {
+    /* Reduz ainda mais o tamanho da fonte principal */
+    #home h1 {
+        font-size: 2.5rem; 
+    }
+
+    /* Mais um ajuste na fonte do parágrafo */
+    #dynamic-description {
+        font-size: 1rem;
+    }
+    
+    /* Ajusta o espaçamento do contêiner de texto se necessário */
+    #home .text {
+        padding: 0 15px; /* Adiciona um pequeno padding nas laterais */
+    }
+}
+
+/* Ajuste para smartphones menores (até 420px de largura) */
+@media (max-width: 420px) {
+    /* Reduz o tamanho da fonte para evitar quebra de linha excessiva */
+    #home h1 {
+        font-size: 2rem; 
+    }
+}

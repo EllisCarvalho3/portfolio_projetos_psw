@@ -1354,3 +1354,38 @@ body.light-mode {
     height: 100px;
   }
 }
+
+@media (max-width: 768px) {
+  .image-modal {
+    padding: 10px;
+  }
+  .image-modal-content {
+    width: 95%;
+    max-width: 600px;
+    max-height: 80vh;
+    border-radius: 10px;
+  }
+  .image-modal-close {
+    font-size: 30px;
+    top: 10px;
+    right: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-modal {
+    align-items: flex-start;
+    padding-top: 60px; /* afasta a imagem do topo */
+  }
+  .image-modal-content {
+    width: 100%;
+    max-width: 100%;
+    max-height: 70vh;
+    border-radius: 8px;
+  }
+  .image-modal-close {
+    top: 8px;
+    right: 15px;
+    font-size: 28px;
+  }
+}
